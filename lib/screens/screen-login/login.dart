@@ -6,22 +6,7 @@ class Login extends StatefulWidget {
   _LoginState createState() => _LoginState();
 }
 
-Widget _criarCampo(String rotulo, String? dica, ValueChanged<String>? vincularValor, String? valorInicial){
-  return TextFormField(
-    decoration: InputDecoration(
-        label: Text(rotulo),
-        hintText: dica
-    ),
-    onChanged: vincularValor,
-    initialValue: valorInicial ??='',
-  );
-}
-
-
 class _LoginState extends State<Login> {
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,10 +16,10 @@ class _LoginState extends State<Login> {
         backgroundColor: Colors.deepPurpleAccent,
         actions: [
           IconButton(
-            icon: const Icon(Icons.edit_note_sharp),
-            onPressed: () =>   Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => SignUp())
-            )
+              icon: const Icon(Icons.edit_note_sharp),
+              onPressed: () =>   Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => SignUp())
+              )
           )
         ],
       ),

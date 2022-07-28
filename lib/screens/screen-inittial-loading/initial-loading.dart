@@ -13,7 +13,7 @@ class _InitialLoadingState extends State<InitialLoading> {
   void initState() {
     super.initState();
 
-    Timer(Duration(seconds: 2), () {
+    Timer(Duration(seconds: 4), () {
       Navigator.of(context).push(
           MaterialPageRoute(builder: (context) => Login()));
     });
