@@ -11,8 +11,9 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  Widget build(BuildContext context) => WillPopScope(
+      onWillPop: () async => false,
+    child: Scaffold(
       body: Container(
         padding: const EdgeInsets.only(top: 60, left: 40, right: 40),
         child: ListView(
@@ -22,12 +23,7 @@ class _SignUpState extends State<SignUp> {
               icon: const Icon(Icons.arrow_back),
               color: Colors.deepPurpleAccent,
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Login(),
-                  ),
-                );
+                Navigator.of(context).pop();
               },
             ),
             const SizedBox(
@@ -122,6 +118,5 @@ class _SignUpState extends State<SignUp> {
           ],
         ),
       ),
-    );
-  }
+    ));
 }
