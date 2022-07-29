@@ -20,11 +20,11 @@ class TargetControl extends StatefulWidget {
 class _TargetControlState extends State<TargetControl> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      routes: {
-        '/': (context) => Login(),
-        '/SignUp': (context) => SignUp(),
-      },
-    );
+      return MaterialApp(
+        routes: {
+          '/': (context) => Login(),
+          '/SignUp': (context) => SignUp(),
+        },
+      );
   }
 }
