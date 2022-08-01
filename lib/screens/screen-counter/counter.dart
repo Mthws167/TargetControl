@@ -79,8 +79,12 @@ class _ProgressState extends State<ProgressBar> {
   }
 
   countMinum() async {
-    await _countRef.set(ServerValue.increment(-1));
-
+    if(_count>0 && _count!=0){
+      await _countRef.set(ServerValue.increment(-1));
+    }
+    if(_count<=0){
+      _countRef.set(0);
+    }
   }
 
   @override
