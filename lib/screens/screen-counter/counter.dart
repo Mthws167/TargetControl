@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 class Counter extends StatefulWidget {
@@ -46,6 +49,45 @@ class ProgressBar extends StatefulWidget {
 
 class _ProgressState extends State<ProgressBar> {
   int _count = 0;
+  late final DatabaseReference _countRef;
+  late StreamSubscription<DatabaseEvent> _countSubscription;
+
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  init() async {
+    _countRef = FirebaseDatabase.instance.ref('count');
+    try {
+      final countSnapshot = await _countRef.get();
+      _count = countSnapshot.value as int;
+    } catch (err) {
+      debugPrint(err.toString());
+    }
+
+    _countSubscription = _countRef.onValue.listen((DatabaseEvent event) {
+      setState(() {
+        _count = (event.snapshot.value ?? 0) as int;
+      });
+    });
+  }
+
+  count() async {
+    await _countRef.set(ServerValue.increment(1));
+  }
+
+  countMinum() async {
+    await _countRef.set(ServerValue.increment(-1));
+
+  }
+
+  @override
+  void dispose() {
+    _countSubscription.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,8 +103,9 @@ class _ProgressState extends State<ProgressBar> {
               IconButton(
                 icon: const Icon(Icons.add),
                 onPressed: () {
+                  count();
                   setState(() {
-                    _count++;
+                    _count ++;
                   });
                 },
               ),
@@ -70,8 +113,9 @@ class _ProgressState extends State<ProgressBar> {
               IconButton(
                 icon: const Icon(Icons.remove),
                 onPressed: () {
+                  countMinum();
                   setState(() {
-                    _count--;
+                    _count --;
                     if (_count < 0) {
                       _count = 0;
                     }
