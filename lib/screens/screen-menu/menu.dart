@@ -86,7 +86,7 @@ class _MenuState extends State<Menu> {
         break;
 
       case 2:
-        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Login()));
+        Navigator.of(context).pop();
         break;
     }
   }
