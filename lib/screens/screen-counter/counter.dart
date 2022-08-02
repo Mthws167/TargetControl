@@ -17,7 +17,7 @@ class _CounterState extends State<Counter> {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Text("Target Control"),
+          title: const Text("Target Control"),
           backgroundColor: Colors.deepPurpleAccent,
           actions: [
             IconButton(
@@ -32,7 +32,7 @@ class _CounterState extends State<Counter> {
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
+            children: const <Widget>[
               ProgressBar(),
             ],
           ),
@@ -41,6 +41,8 @@ class _CounterState extends State<Counter> {
 }
 
 class ProgressBar extends StatefulWidget {
+  const ProgressBar({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return _ProgressState();
@@ -48,9 +50,15 @@ class ProgressBar extends StatefulWidget {
 }
 
 class _ProgressState extends State<ProgressBar> {
-  int _count = 0;
-  late final DatabaseReference _countRef;
-  late StreamSubscription<DatabaseEvent> _countSubscription;
+  int _countMale = 0;
+  int _countFemale = 0;
+  int _countChield = 0;
+  late final DatabaseReference _countRefMale;
+  late StreamSubscription<DatabaseEvent> _countSubscriptionMale;
+  late final DatabaseReference _countRefFemale;
+  late StreamSubscription<DatabaseEvent> _countSubscriptionFemale;
+  late final DatabaseReference _countRefChield;
+  late StreamSubscription<DatabaseEvent> _countSubscriptionChield;
 
   @override
   void initState() {
@@ -59,63 +67,84 @@ class _ProgressState extends State<ProgressBar> {
   }
 
   init() async {
-    _countRef = FirebaseDatabase.instance.ref('count');
+    _countRefMale = FirebaseDatabase.instance.ref('countMale');
+    _countRefFemale = FirebaseDatabase.instance.ref('countFemale');
+    _countRefChield = FirebaseDatabase.instance.ref('countChield');
     try {
-      final countSnapshot = await _countRef.get();
-      _count = countSnapshot.value as int;
+      final countSnapshotMale = await _countRefMale.get();
+      final countSnapshotFemale = await _countRefFemale.get();
+      final countSnapshotChield = await _countRefChield.get();
+      _countMale = countSnapshotMale.value as int;
+      _countFemale = countSnapshotFemale.value as int;
+      _countChield = countSnapshotChield.value as int;
     } catch (err) {
       debugPrint(err.toString());
     }
 
-    _countSubscription = _countRef.onValue.listen((DatabaseEvent event) {
+    _countSubscriptionMale =
+        _countRefMale.onValue.listen((DatabaseEvent event) {
       setState(() {
-        _count = (event.snapshot.value ?? 0) as int;
+        _countMale = (event.snapshot.value ?? 0) as int;
+      });
+    });
+    _countSubscriptionFemale =
+        _countRefFemale.onValue.listen((DatabaseEvent event) {
+      setState(() {
+        _countFemale = (event.snapshot.value ?? 0) as int;
+      });
+    });
+    _countSubscriptionChield =
+        _countRefChield.onValue.listen((DatabaseEvent event) {
+      setState(() {
+        _countChield = (event.snapshot.value ?? 0) as int;
       });
     });
   }
 
   countMale() async {
-    await _countRef.set(ServerValue.increment(1));
-  }
-
-  countFemale() async {
-    await _countRef.set(ServerValue.increment(1));
-  }
-
-  countChield() async {
-    await _countRef.set(ServerValue.increment(1));
+    await _countRefMale.set(ServerValue.increment(1));
   }
 
   countMinumMale() async {
-    if (_count > 0 && _count != 0) {
-      await _countRef.set(ServerValue.increment(-1));
+    if (_countMale > 0 && _countMale != 0) {
+      await _countRefMale.set(ServerValue.increment(-1));
     }
-    if (_count <= 0) {
-      _countRef.set(0);
+    if (_countMale <= 0) {
+      _countRefMale.set(0);
     }
   }
 
   countMinumFemale() async {
-    if (_count > 0 && _count != 0) {
-      await _countRef.set(ServerValue.increment(-1));
+    if (_countFemale > 0 && _countFemale != 0) {
+      await _countRefFemale.set(ServerValue.increment(-1));
     }
-    if (_count <= 0) {
-      _countRef.set(0);
+    if (_countFemale <= 0) {
+      _countRefFemale.set(0);
     }
   }
 
+  countFemale() async {
+    await _countRefFemale.set(ServerValue.increment(1));
+  }
+
   countMinumChield() async {
-    if (_count > 0 && _count != 0) {
-      await _countRef.set(ServerValue.increment(-1));
+    if (_countChield > 0 && _countChield != 0) {
+      await _countRefChield.set(ServerValue.increment(-1));
     }
-    if (_count <= 0) {
-      _countRef.set(0);
+    if (_countChield <= 0) {
+      _countRefChield.set(0);
     }
+  }
+
+  countChield() async {
+    await _countRefChield.set(ServerValue.increment(1));
   }
 
   @override
   void dispose() {
-    _countSubscription.cancel();
+    _countSubscriptionMale.cancel();
+    _countSubscriptionFemale.cancel();
+    _countSubscriptionChield.cancel();
     super.dispose();
   }
 
@@ -126,41 +155,49 @@ class _ProgressState extends State<ProgressBar> {
       children: <Widget>[
         Container(
           alignment: Alignment.center,
-          child: Text(
+          child: const Text(
             'Homens',
             style: TextStyle(fontSize: 30),
           ),
         ),
         Container(
-            padding: EdgeInsets.fromLTRB(20, 0, 20, 100),
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 100),
             child: Row(children: <Widget>[
               Container(
-                padding: EdgeInsets.fromLTRB(30, 0, 80, 0),
+                padding: const EdgeInsets.fromLTRB(30, 0, 80, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      fixedSize: Size(60, 60),
-                      shape: CircleBorder(side: BorderSide(width: 5, color: Colors.deepPurpleAccent)),
+                      fixedSize: const Size(60, 60),
+                      shape: const CircleBorder(
+                          side: BorderSide(
+                              width: 5, color: Colors.deepPurpleAccent)),
                       primary: Colors.white),
-                  child: Icon(Icons.add,color: Colors.deepPurpleAccent,),
+                  child: const Icon(
+                    Icons.add,
+                    color: Colors.deepPurpleAccent,
+                  ),
                   onPressed: () {
                     countMale();
                   },
                 ),
               ),
-              Container(
-                child: Text(
-                  _count.toString(),
-                  style: TextStyle(fontSize: 30),
-                ),
+              Text(
+                _countMale.toString(),
+                style: const TextStyle(fontSize: 30),
               ),
               Container(
-                padding: EdgeInsets.fromLTRB(80, 0, 0, 0),
+                padding: const EdgeInsets.fromLTRB(80, 0, 0, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      fixedSize: Size(60, 60),
-                      shape: CircleBorder(side: BorderSide(width: 5, color: Colors.deepPurpleAccent)),
+                      fixedSize: const Size(60, 60),
+                      shape: const CircleBorder(
+                          side: BorderSide(
+                              width: 5, color: Colors.deepPurpleAccent)),
                       primary: Colors.white),
-                  child: Icon(Icons.remove,color: Colors.deepPurpleAccent,),
+                  child: const Icon(
+                    Icons.remove,
+                    color: Colors.deepPurpleAccent,
+                  ),
                   onPressed: () {
                     countMinumMale();
                   },
@@ -169,41 +206,49 @@ class _ProgressState extends State<ProgressBar> {
             ])),
         Container(
           alignment: Alignment.center,
-          child: Text(
+          child: const Text(
             'Mulheres',
             style: TextStyle(fontSize: 30),
           ),
         ),
         Container(
-            padding: EdgeInsets.fromLTRB(20, 0, 20, 100),
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 100),
             child: Row(children: <Widget>[
               Container(
-                padding: EdgeInsets.fromLTRB(30, 0, 80, 0),
+                padding: const EdgeInsets.fromLTRB(30, 0, 80, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      fixedSize: Size(60, 60),
-                      shape: CircleBorder(side: BorderSide(width: 5, color: Colors.deepPurpleAccent)),
+                      fixedSize: const Size(60, 60),
+                      shape: const CircleBorder(
+                          side: BorderSide(
+                              width: 5, color: Colors.deepPurpleAccent)),
                       primary: Colors.white),
-                  child: Icon(Icons.add,color: Colors.deepPurpleAccent,),
+                  child: const Icon(
+                    Icons.add,
+                    color: Colors.deepPurpleAccent,
+                  ),
                   onPressed: () {
                     countFemale();
                   },
                 ),
               ),
-              Container(
-                child: Text(
-                  _count.toString(),
-                  style: TextStyle(fontSize: 30),
-                ),
+              Text(
+                _countFemale.toString(),
+                style: const TextStyle(fontSize: 30),
               ),
               Container(
-                padding: EdgeInsets.fromLTRB(80, 0, 0, 0),
+                padding: const EdgeInsets.fromLTRB(80, 0, 0, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      fixedSize: Size(60, 60),
-                      shape: CircleBorder(side: BorderSide(width: 5, color: Colors.deepPurpleAccent)),
+                      fixedSize: const Size(60, 60),
+                      shape: const CircleBorder(
+                          side: BorderSide(
+                              width: 5, color: Colors.deepPurpleAccent)),
                       primary: Colors.white),
-                  child: Icon(Icons.remove,color: Colors.deepPurpleAccent,),
+                  child: const Icon(
+                    Icons.remove,
+                    color: Colors.deepPurpleAccent,
+                  ),
                   onPressed: () {
                     countMinumFemale();
                   },
@@ -212,47 +257,58 @@ class _ProgressState extends State<ProgressBar> {
             ])),
         Container(
           alignment: Alignment.center,
-          child: Text(
+          child: const Text(
             'Crianças',
             style: TextStyle(fontSize: 30),
           ),
         ),
         Container(
-            padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 100),
             child: Row(children: <Widget>[
               Container(
                 padding: EdgeInsets.fromLTRB(30, 0, 80, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      fixedSize: Size(60, 60),
-                      shape: CircleBorder(side: BorderSide(width: 5, color: Colors.deepPurpleAccent)),
+                      fixedSize: const Size(60, 60),
+                      shape: const CircleBorder(
+                          side: BorderSide(
+                              width: 5, color: Colors.deepPurpleAccent)),
                       primary: Colors.white),
-                  child: Icon(Icons.add,color: Colors.deepPurpleAccent,),
+                  child: const Icon(
+                    Icons.add,
+                    color: Colors.deepPurpleAccent,
+                  ),
                   onPressed: () {
                     countChield();
                   },
                 ),
               ),
-              Container(
-                child: Text(
-                  _count.toString(),
-                  style: TextStyle(fontSize: 30),
-                ),
+              Text(
+                _countChield.toString(),
+                style: const TextStyle(fontSize: 30),
               ),
               Container(
-                padding: EdgeInsets.fromLTRB(80, 0, 0, 0),
+                padding: const EdgeInsets.fromLTRB(80, 0, 0, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      fixedSize: Size(60, 60),
-                      shape: CircleBorder(side: BorderSide(width: 5, color: Colors.deepPurpleAccent)),
+                      fixedSize: const Size(60, 60),
+                      shape: const CircleBorder(
+                          side: BorderSide(
+                              width: 5, color: Colors.deepPurpleAccent)),
                       primary: Colors.white),
-                  child: Icon(Icons.remove,color: Colors.deepPurpleAccent,),
+                  child: const Icon(
+                    Icons.remove,
+                    color: Colors.deepPurpleAccent,
+                  ),
                   onPressed: () {
                     countMinumChield();
                   },
                 ),
               ),
             ])),
+        Container(
+          child: Row(children: <Widget>[]),
+        ),
       ],
     );
   }
