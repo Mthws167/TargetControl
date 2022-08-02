@@ -74,15 +74,41 @@ class _ProgressState extends State<ProgressBar> {
     });
   }
 
-  count() async {
+  countMale() async {
     await _countRef.set(ServerValue.increment(1));
   }
 
-  countMinum() async {
-    if(_count>0 && _count!=0){
+  countFemale() async {
+    await _countRef.set(ServerValue.increment(1));
+  }
+
+  countChield() async {
+    await _countRef.set(ServerValue.increment(1));
+  }
+
+  countMinumMale() async {
+    if (_count > 0 && _count != 0) {
       await _countRef.set(ServerValue.increment(-1));
     }
-    if(_count<=0){
+    if (_count <= 0) {
+      _countRef.set(0);
+    }
+  }
+
+  countMinumFemale() async {
+    if (_count > 0 && _count != 0) {
+      await _countRef.set(ServerValue.increment(-1));
+    }
+    if (_count <= 0) {
+      _countRef.set(0);
+    }
+  }
+
+  countMinumChield() async {
+    if (_count > 0 && _count != 0) {
+      await _countRef.set(ServerValue.increment(-1));
+    }
+    if (_count <= 0) {
       _countRef.set(0);
     }
   }
@@ -95,36 +121,136 @@ class _ProgressState extends State<ProgressBar> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Container(
-            padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-            decoration: BoxDecoration(
-                color: Color.fromARGB(255, 192, 178, 178),
-                borderRadius: BorderRadius.circular(50)),
+          alignment: Alignment.center,
+          child: Text(
+            'Homem',
+            style: TextStyle(fontSize: 30),
+          ),
+        ),
+        Container(
+            padding: EdgeInsets.fromLTRB(20, 0, 20, 100),
             child: Row(children: <Widget>[
-              IconButton(
-                icon: const Icon(Icons.add),
-                onPressed: () {
-                  count();
-                  setState(() {
-                    _count ++;
-                  });
-                },
+              Container(
+                padding: EdgeInsets.fromLTRB(20, 0, 80, 0),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      fixedSize: Size(60, 60),
+                      shape: CircleBorder(),
+                      primary: Colors.deepPurpleAccent),
+                  child: Icon(Icons.add),
+                  onPressed: () {
+                    countMale();
+                  },
+                ),
               ),
-              Text(_count.toString()),
-              IconButton(
-                icon: const Icon(Icons.remove),
-                onPressed: () {
-                  countMinum();
-                  setState(() {
-                    _count --;
-                    if (_count < 0) {
-                      _count = 0;
-                    }
-                  });
-                },
+              Container(
+                child: Text(
+                  _count.toString(),
+                  style: TextStyle(fontSize: 30),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.fromLTRB(80, 0, 0, 0),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      fixedSize: Size(60, 60),
+                      shape: CircleBorder(),
+                      primary: Colors.deepPurpleAccent),
+                  child: Icon(Icons.remove),
+                  onPressed: () {
+                    countMinumMale();
+                  },
+                ),
+              ),
+            ])),
+        Container(
+          alignment: Alignment.center,
+          child: Text(
+            'Mulher',
+            style: TextStyle(fontSize: 30),
+          ),
+        ),
+        Container(
+            padding: EdgeInsets.fromLTRB(20, 0, 20, 100),
+            child: Row(children: <Widget>[
+              Container(
+                padding: EdgeInsets.fromLTRB(20, 0, 80, 0),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      fixedSize: Size(60, 60),
+                      shape: CircleBorder(),
+                      primary: Colors.deepPurpleAccent),
+                  child: Icon(Icons.add),
+                  onPressed: () {
+                    countFemale();
+                  },
+                ),
+              ),
+              Container(
+                child: Text(
+                  _count.toString(),
+                  style: TextStyle(fontSize: 30),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.fromLTRB(80, 0, 0, 0),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      fixedSize: Size(60, 60),
+                      shape: CircleBorder(),
+                      primary: Colors.deepPurpleAccent),
+                  child: Icon(Icons.remove),
+                  onPressed: () {
+                    countMinumFemale();
+                  },
+                ),
+              ),
+            ])),
+        Container(
+          alignment: Alignment.center,
+          child: Text(
+            'Criança',
+            style: TextStyle(fontSize: 30),
+          ),
+        ),
+        Container(
+            padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+            child: Row(children: <Widget>[
+              Container(
+                padding: EdgeInsets.fromLTRB(20, 0, 80, 0),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      fixedSize: Size(60, 60),
+                      shape: CircleBorder(),
+                      primary: Colors.deepPurpleAccent),
+                  child: Icon(Icons.add),
+                  onPressed: () {
+                    countChield();
+                  },
+                ),
+              ),
+              Container(
+                child: Text(
+                  _count.toString(),
+                  style: TextStyle(fontSize: 30),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.fromLTRB(80, 0, 0, 0),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      fixedSize: Size(60, 60),
+                      shape: CircleBorder(),
+                      primary: Colors.deepPurpleAccent),
+                  child: Icon(Icons.remove),
+                  onPressed: () {
+                    countMinumChield();
+                  },
+                ),
               ),
             ])),
       ],
