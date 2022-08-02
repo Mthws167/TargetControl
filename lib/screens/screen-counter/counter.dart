@@ -127,7 +127,7 @@ class _ProgressState extends State<ProgressBar> {
         Container(
           alignment: Alignment.center,
           child: Text(
-            'Homem',
+            'Homens',
             style: TextStyle(fontSize: 30),
           ),
         ),
@@ -139,9 +139,9 @@ class _ProgressState extends State<ProgressBar> {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       fixedSize: Size(60, 60),
-                      shape: CircleBorder(),
-                      primary: Colors.deepPurpleAccent),
-                  child: Icon(Icons.add),
+                      shape: CircleBorder(side: BorderSide(width: 5, color: Colors.deepPurpleAccent)),
+                      primary: Colors.white),
+                  child: Icon(Icons.add,color: Colors.deepPurpleAccent,),
                   onPressed: () {
                     countMale();
                   },
@@ -158,9 +158,9 @@ class _ProgressState extends State<ProgressBar> {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       fixedSize: Size(60, 60),
-                      shape: CircleBorder(),
-                      primary: Colors.deepPurpleAccent),
-                  child: Icon(Icons.remove),
+                      shape: CircleBorder(side: BorderSide(width: 5, color: Colors.deepPurpleAccent)),
+                      primary: Colors.white),
+                  child: Icon(Icons.remove,color: Colors.deepPurpleAccent,),
                   onPressed: () {
                     countMinumMale();
                   },
@@ -170,7 +170,7 @@ class _ProgressState extends State<ProgressBar> {
         Container(
           alignment: Alignment.center,
           child: Text(
-            'Mulher',
+            'Mulheres',
             style: TextStyle(fontSize: 30),
           ),
         ),
@@ -182,9 +182,9 @@ class _ProgressState extends State<ProgressBar> {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       fixedSize: Size(60, 60),
-                      shape: CircleBorder(),
-                      primary: Colors.deepPurpleAccent),
-                  child: Icon(Icons.add),
+                      shape: CircleBorder(side: BorderSide(width: 5, color: Colors.deepPurpleAccent)),
+                      primary: Colors.white),
+                  child: Icon(Icons.add,color: Colors.deepPurpleAccent,),
                   onPressed: () {
                     countFemale();
                   },
@@ -201,9 +201,9 @@ class _ProgressState extends State<ProgressBar> {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       fixedSize: Size(60, 60),
-                      shape: CircleBorder(),
-                      primary: Colors.deepPurpleAccent),
-                  child: Icon(Icons.remove),
+                      shape: CircleBorder(side: BorderSide(width: 5, color: Colors.deepPurpleAccent)),
+                      primary: Colors.white),
+                  child: Icon(Icons.remove,color: Colors.deepPurpleAccent,),
                   onPressed: () {
                     countMinumFemale();
                   },
@@ -213,7 +213,7 @@ class _ProgressState extends State<ProgressBar> {
         Container(
           alignment: Alignment.center,
           child: Text(
-            'Criança',
+            'Crianças',
             style: TextStyle(fontSize: 30),
           ),
         ),
@@ -225,9 +225,9 @@ class _ProgressState extends State<ProgressBar> {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       fixedSize: Size(60, 60),
-                      shape: CircleBorder(),
-                      primary: Colors.deepPurpleAccent),
-                  child: Icon(Icons.add),
+                      shape: CircleBorder(side: BorderSide(width: 5, color: Colors.deepPurpleAccent)),
+                      primary: Colors.white),
+                  child: Icon(Icons.add,color: Colors.deepPurpleAccent,),
                   onPressed: () {
                     countChield();
                   },
@@ -244,9 +244,9 @@ class _ProgressState extends State<ProgressBar> {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       fixedSize: Size(60, 60),
-                      shape: CircleBorder(),
-                      primary: Colors.deepPurpleAccent),
-                  child: Icon(Icons.remove),
+                      shape: CircleBorder(side: BorderSide(width: 5, color: Colors.deepPurpleAccent)),
+                      primary: Colors.white),
+                  child: Icon(Icons.remove,color: Colors.deepPurpleAccent,),
                   onPressed: () {
                     countMinumChield();
                   },
