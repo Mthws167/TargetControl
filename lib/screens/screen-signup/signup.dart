@@ -1,8 +1,5 @@
-import 'dart:developer';
-
-import 'package:countpeople/main.dart';
 import 'package:flutter/material.dart';
-import '../screen-login/login.dart';
+//import 'package:cpf_cnpj_validator/cpf_validator.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -75,6 +72,22 @@ class _SignUpState extends State<SignUp> {
               height: 10,
             ),
             TextFormField(
+              keyboardType: TextInputType.phone,
+              obscureText: true,
+              decoration: const InputDecoration(
+                labelText: "Telefone:",
+                labelStyle: TextStyle(
+                  color: Colors.black38,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 20,
+                ),
+              ),
+              style: const TextStyle(fontSize: 20),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            TextFormField(
               keyboardType: TextInputType.visiblePassword,
               obscureText: true,
               decoration: const InputDecoration(
@@ -100,7 +113,6 @@ class _SignUpState extends State<SignUp> {
                       Text(
                         "Cadastrar",
                         style: TextStyle(
-                          decoration: TextDecoration.underline,
                           decorationStyle: TextDecorationStyle.double,
                           fontWeight: FontWeight.bold,
                           color: Colors.deepPurpleAccent,

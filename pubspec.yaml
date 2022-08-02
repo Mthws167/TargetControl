@@ -37,6 +37,7 @@ dependencies:
   fluttertoast:
   firebase_core:
   firebase_database:
+  # cpf_cnpj_validator:
 
 dev_dependencies:
   flutter_test:

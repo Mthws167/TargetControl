@@ -94,7 +94,6 @@ class _LoginState extends State<Login> {
                         Text(
                           "Login",
                           style: TextStyle(
-                            decoration: TextDecoration.underline,
                             decorationStyle: TextDecorationStyle.double,
                             fontWeight: FontWeight.bold,
                             color: Colors.deepPurpleAccent,

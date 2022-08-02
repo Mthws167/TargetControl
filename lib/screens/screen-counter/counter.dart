@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
+import '../screen-menu/menu.dart';
+
 class Counter extends StatefulWidget {
   const Counter({Key? key}) : super(key: key);
 
@@ -15,19 +17,14 @@ class _CounterState extends State<Counter> {
   Widget build(BuildContext context) => WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
+        endDrawer: Menu(),
         appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: const Text("Target Control"),
           backgroundColor: Colors.deepPurpleAccent,
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.list),
-              color: Colors.white,
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(25),
             ),
-          ],
+          ),
         ),
         body: Center(
           child: Column(
