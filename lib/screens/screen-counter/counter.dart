@@ -135,7 +135,7 @@ class _ProgressState extends State<ProgressBar> {
             padding: EdgeInsets.fromLTRB(20, 0, 20, 100),
             child: Row(children: <Widget>[
               Container(
-                padding: EdgeInsets.fromLTRB(20, 0, 80, 0),
+                padding: EdgeInsets.fromLTRB(30, 0, 80, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       fixedSize: Size(60, 60),
@@ -178,7 +178,7 @@ class _ProgressState extends State<ProgressBar> {
             padding: EdgeInsets.fromLTRB(20, 0, 20, 100),
             child: Row(children: <Widget>[
               Container(
-                padding: EdgeInsets.fromLTRB(20, 0, 80, 0),
+                padding: EdgeInsets.fromLTRB(30, 0, 80, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       fixedSize: Size(60, 60),
@@ -221,7 +221,7 @@ class _ProgressState extends State<ProgressBar> {
             padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: Row(children: <Widget>[
               Container(
-                padding: EdgeInsets.fromLTRB(20, 0, 80, 0),
+                padding: EdgeInsets.fromLTRB(30, 0, 80, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       fixedSize: Size(60, 60),
