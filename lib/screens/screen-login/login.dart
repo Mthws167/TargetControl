@@ -1,11 +1,14 @@
-import 'package:countpeople/screens/screen-signup/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import '../screen-counter/counter.dart ';
+
+import '../../main.dart';
 
 class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+  final VoidCallback onClickedSignUp;
+  const Login({Key? key,required this.onClickedSignUp}) : super(key: key);
 
   @override
   _LoginState createState() => _LoginState();
@@ -23,7 +26,6 @@ class _LoginState extends State<Login> {
 
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) => WillPopScope(
@@ -45,7 +47,6 @@ class _LoginState extends State<Login> {
         }
       },
       child: Scaffold(
-
         body: Container(
           padding: const EdgeInsets.only(top: 60, left: 40, right: 40),
           child: ListView(
@@ -99,7 +100,7 @@ class _LoginState extends State<Login> {
               const SizedBox(
                 height: 40,
               ),
-              Container(
+              SizedBox(
                 height: 60,
                 child: SizedBox.expand(
                   child: TextButton(
@@ -121,36 +122,50 @@ class _LoginState extends State<Login> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
-                child: FlatButton(
-                  child: const Text(
-                    "Cadastre-se aqui",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.deepPurpleAccent,
-                      fontSize: 13,
+              ),
+              RichText(text: TextSpan(
+                style: const TextStyle(color: Colors.black),
+                text: 'Cadastre-se ',
+                children: [
+                  TextSpan(
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = widget.onClickedSignUp,
+                    text: 'Aqui!',
+                    style: const TextStyle(
+                      decoration: TextDecoration.underline,color: Colors.deepPurpleAccent
                     ),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SignUp(),
-                      ),
-                    );
-                  },
-                ),
+                  )
+                ]
+              ),
               ),
             ],
           ),
         ),
       ));
 
-  Future signIn() async{
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email:emailController.text.trim(),
-      password: passwordController.text.trim(),
-    );
+  Future signIn() async {
+
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const Center(
+          child: CircularProgressIndicator(),
+        ));
+
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+
+    } on FirebaseAuthException catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+    }
+
+    navigatorKey.currentState!.popUntil((route)=>route.isFirst);
   }
 }

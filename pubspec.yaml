@@ -39,6 +39,7 @@ dependencies:
   firebase_database:
   cloud_firestore:
   firebase_auth:
+  email_validator:
   # cpf_cnpj_validator:
 
 dev_dependencies:

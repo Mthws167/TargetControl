@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../screen-account/account.dart';
 import '../screen-chart/chart.dart';
-import '../screen-login/login.dart';
 
 class Menu extends StatefulWidget {
   const Menu({Key? key}) : super(key: key);
@@ -12,25 +11,25 @@ class Menu extends StatefulWidget {
 }
 
 class _MenuState extends State<Menu> {
-  final padding  = const EdgeInsets.symmetric(horizontal: 20);
+  final user = FirebaseAuth.instance.currentUser;
+  final padding = const EdgeInsets.symmetric(horizontal: 20);
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      width: 185,
+      width: 200,
       child: Material(
         color: const Color.fromRGBO(124, 77, 255, 1.0).withOpacity(0.9),
         child: ListView(
           padding: padding,
           children: <Widget>[
             const SizedBox(
-              height: 70,
+              height: 50,
             ),
-            Divider(color: Colors.white70),
-
             buildMenuItem(
               text: 'Conta',
               icon: Icons.account_circle_outlined,
-              onClicked: ()=> selectedItem(context, 0),
+              onClicked: () => selectedItem(context, 0),
             ),
             const SizedBox(
               height: 20,
@@ -38,19 +37,19 @@ class _MenuState extends State<Menu> {
             buildMenuItem(
               text: 'Relatório',
               icon: Icons.pie_chart_sharp,
-              onClicked: ()=> selectedItem(context, 1),
+              onClicked: () => selectedItem(context, 1),
             ),
             const SizedBox(
               height: 500,
             ),
-            Divider(color: Colors.white70),
+            const Divider(color: Colors.white70),
             const SizedBox(
               height: 20,
             ),
             buildMenuItem(
               text: 'Sair',
               icon: Icons.exit_to_app,
-              onClicked: ()=> selectedItem(context, 2),
+              onClicked: () => selectedItem(context, 2),
             ),
           ],
         ),
@@ -67,28 +66,36 @@ class _MenuState extends State<Menu> {
     const hoverColor = Colors.white70;
 
     return ListTile(
-      leading: Icon(icon,color: color,),
-      title: Text(text,style: const TextStyle(color: color),),
+      leading: Icon(
+        icon,
+        color: color,
+      ),
+      title: Text(
+        text,
+        style: const TextStyle(color: color),
+      ),
       hoverColor: hoverColor,
       onTap: onClicked,
     );
   }
 
-  void selectedItem(BuildContext context, int index){
+  void selectedItem(BuildContext context, int index) {
     Navigator.of(context).pop();
-    switch(index){
+    switch (index) {
       case 0:
-        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Account()));
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const Account()));
         break;
 
       case 1:
-        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Chart()));
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const Chart()));
         break;
 
       case 2:
+        FirebaseAuth.instance.signOut();
         Navigator.of(context).pop();
         break;
     }
   }
-
 }
