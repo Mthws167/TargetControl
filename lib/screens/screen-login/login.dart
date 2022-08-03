@@ -1,4 +1,5 @@
 import 'package:countpeople/screens/screen-signup/signup.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../screen-counter/counter.dart ';
@@ -11,7 +12,18 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   DateTime timeBackPressed = DateTime.now();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) => WillPopScope(
@@ -33,6 +45,7 @@ class _LoginState extends State<Login> {
         }
       },
       child: Scaffold(
+
         body: Container(
           padding: const EdgeInsets.only(top: 60, left: 40, right: 40),
           child: ListView(
@@ -54,6 +67,7 @@ class _LoginState extends State<Login> {
                 height: 20,
               ),
               TextFormField(
+                controller: emailController,
                 keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
                   labelText: "E-mail:",
@@ -69,6 +83,7 @@ class _LoginState extends State<Login> {
                 height: 10,
               ),
               TextFormField(
+                controller: passwordController,
                 keyboardType: TextInputType.visiblePassword,
                 obscureText: true,
                 decoration: const InputDecoration(
@@ -102,14 +117,7 @@ class _LoginState extends State<Login> {
                         ),
                       ],
                     ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Counter(),
-                        ),
-                      );
-                    },
+                    onPressed: signIn,
                   ),
                 ),
               ),
@@ -138,4 +146,11 @@ class _LoginState extends State<Login> {
           ),
         ),
       ));
+
+  Future signIn() async{
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email:emailController.text.trim(),
+      password: passwordController.text.trim(),
+    );
+  }
 }
