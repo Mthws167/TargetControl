@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -49,21 +46,33 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyC0-v-Lq73acLDOlAXpIb0yjltCAWgW4e8',
+    appId: '1:163088815905:web:4f5929242bc498554f9060',
+    messagingSenderId: '163088815905',
+    projectId: 'target-control-0-ef81c',
+    authDomain: 'target-control-0-ef81c.firebaseapp.com',
+    databaseURL: 'https://target-control-0-ef81c-default-rtdb.firebaseio.com',
+    storageBucket: 'target-control-0-ef81c.appspot.com',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyA1lXOLauqPdPkgW7Qpf3wrZywsKeq7YV8',
-    appId: '1:168009827189:android:1e4111e35249681aec893c',
-    messagingSenderId: '168009827189',
-    projectId: 'target-control-8596f',
-    storageBucket: 'target-control-8596f.appspot.com',
+    apiKey: 'AIzaSyBFD3z0zF8SjAgY9YIFS59-2cQphqowPew',
+    appId: '1:163088815905:android:7b7ada390471c0024f9060',
+    messagingSenderId: '163088815905',
+    projectId: 'target-control-0-ef81c',
+    databaseURL: 'https://target-control-0-ef81c-default-rtdb.firebaseio.com',
+    storageBucket: 'target-control-0-ef81c.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCxYAeXOct5SRAIhkWiuoFI_M3LsXt--Rs',
-    appId: '1:168009827189:ios:38f8718f72229bbcec893c',
-    messagingSenderId: '168009827189',
-    projectId: 'target-control-8596f',
-    storageBucket: 'target-control-8596f.appspot.com',
-    iosClientId: '168009827189-ljq159a7hpjusr7p78q00237f0jpgcoc.apps.googleusercontent.com',
+    apiKey: 'AIzaSyAlErdda1Qzi2vVo956paj79gOLflLDM1M',
+    appId: '1:163088815905:ios:304a3f75def428fe4f9060',
+    messagingSenderId: '163088815905',
+    projectId: 'target-control-0-ef81c',
+    databaseURL: 'https://target-control-0-ef81c-default-rtdb.firebaseio.com',
+    storageBucket: 'target-control-0-ef81c.appspot.com',
+    iosClientId: '163088815905-l2qts687i2s8lidjfmnftfjgm29qd81n.apps.googleusercontent.com',
     iosBundleId: 'com.example.countpeople',
   );
 }
