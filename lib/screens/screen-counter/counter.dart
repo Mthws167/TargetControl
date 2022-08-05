@@ -17,7 +17,7 @@ class _CounterState extends State<Counter> {
   Widget build(BuildContext context) => WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        endDrawer: const Menu(),
+        endDrawer: Menu(),
         appBar: AppBar(
           backgroundColor: Colors.deepPurpleAccent,
           shape: const RoundedRectangleBorder(
@@ -26,7 +26,7 @@ class _CounterState extends State<Counter> {
             ),
           ),
         ),
-        body: SingleChildScrollView(
+        body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const <Widget>[
@@ -151,9 +151,6 @@ class _ProgressState extends State<ProgressBar> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Container(
-          padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
-        ),
-        Container(
           alignment: Alignment.center,
           child: const Text(
             'Homens',
@@ -266,7 +263,7 @@ class _ProgressState extends State<ProgressBar> {
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 100),
             child: Row(children: <Widget>[
               Container(
-                padding: const EdgeInsets.fromLTRB(30, 0, 80, 0),
+                padding: EdgeInsets.fromLTRB(30, 0, 80, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       fixedSize: const Size(60, 60),
@@ -306,6 +303,9 @@ class _ProgressState extends State<ProgressBar> {
                 ),
               ),
             ])),
+        Container(
+          child: Row(children: <Widget>[]),
+        ),
       ],
     );
   }
