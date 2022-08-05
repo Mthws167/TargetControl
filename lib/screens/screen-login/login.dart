@@ -1,11 +1,13 @@
 import 'package:countpeople/screens/screen-signup/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:countpeople/main.dart';
 
 class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+  final VoidCallback onClickedSignUp;
+  const Login({Key? key,required this.onClickedSignUp}) : super(key: key);
 
   @override
   _LoginState createState() => _LoginState();
@@ -121,23 +123,24 @@ class _LoginState extends State<Login> {
               ),
               SizedBox(
                 height: 20,
-                child: FlatButton(
-                  child: const Text(
-                    "Cadastre-se aqui",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.deepPurpleAccent,
-                      fontSize: 13,
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SignUp(),
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    style:  TextStyle(color: Colors.black,fontSize: 13),
+                    text: 'Não possui conta? ',
+                    children: [
+                      TextSpan(
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = widget.onClickedSignUp,
+                        text: 'Cadastre-se',
+                        style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          color: Colors.deepPurpleAccent,
+                          fontSize: 13,
+                        )
                       ),
-                    );
-                  },
+                    ]
+                  ),
                 ),
               ),
             ],

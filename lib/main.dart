@@ -1,3 +1,4 @@
+import 'package:countpeople/screens/authPage.dart';
 import 'package:countpeople/screens/screen-login/login.dart';
 import 'package:countpeople/screens/screen-counter/counter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -46,7 +47,7 @@ class TargetControl extends StatelessWidget {
               } else if (snapshot.hasData) {
                 return Counter();
               } else {
-                return Login();
+                return AuthPage();
               }
             }),
       );

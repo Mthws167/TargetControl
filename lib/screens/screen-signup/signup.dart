@@ -1,7 +1,10 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-//import 'package:cpf_cnpj_validator/cpf_validator.dart';
 
 class SignUp extends StatefulWidget {
+  final VoidCallback onClickedSignIn;
+  const SignUp({Key? key,required this.onClickedSignIn}) : super(key: key);
+
   @override
   _SignUpState createState() => _SignUpState();
 }
@@ -15,16 +18,8 @@ class _SignUpState extends State<SignUp> {
         padding: const EdgeInsets.only(top: 60, left: 40, right: 40),
         child: ListView(
           children: <Widget>[
-            IconButton(
-              alignment: Alignment.topLeft,
-              icon: const Icon(Icons.arrow_back),
-              color: Colors.deepPurpleAccent,
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
             const SizedBox(
-              height: 60,
+              height: 150,
             ),
             TextFormField(
               keyboardType: TextInputType.emailAddress,
@@ -55,7 +50,7 @@ class _SignUpState extends State<SignUp> {
               style: const TextStyle(fontSize: 20),
             ),
             const SizedBox(
-              height: 40,
+              height: 80,
             ),
             Container(
               height: 60,
@@ -78,6 +73,28 @@ class _SignUpState extends State<SignUp> {
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+              child: RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                    style:  TextStyle(color: Colors.black,fontSize: 13),
+                    text: 'Já possui conta? ',
+                    children: [
+                      TextSpan(
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = widget.onClickedSignIn,
+                          text: 'Login',
+                          style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            color: Colors.deepPurpleAccent,
+                            fontSize: 13,
+                          )
+                      ),
+                    ]
                 ),
               ),
             ),
