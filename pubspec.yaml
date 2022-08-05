@@ -39,7 +39,10 @@ dependencies:
   firebase_database:
   cloud_firestore:
   firebase_auth:
-  # cpf_cnpj_validator:
+
+dependency_overrides:
+  firebase_messaging_platform_interface: 4.1.0
+
 
 dev_dependencies:
   flutter_test:

@@ -2,7 +2,7 @@ import 'package:countpeople/screens/screen-signup/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import '../screen-counter/counter.dart ';
+import 'package:countpeople/main.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -24,7 +24,6 @@ class _LoginState extends State<Login> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) => WillPopScope(
       onWillPop: () async {
@@ -45,7 +44,6 @@ class _LoginState extends State<Login> {
         }
       },
       child: Scaffold(
-
         body: Container(
           padding: const EdgeInsets.only(top: 60, left: 40, right: 40),
           child: ListView(
@@ -147,10 +145,26 @@ class _LoginState extends State<Login> {
         ),
       ));
 
-  Future signIn() async{
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email:emailController.text.trim(),
-      password: passwordController.text.trim(),
-    );
+  Future signIn() async {
+
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => Center(
+              child: CircularProgressIndicator(
+                color: Colors.deepPurpleAccent,
+              ),
+            ));
+
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+    } on FirebaseAuthException catch (e) {
+      print(e);
+    }
+
+    navigatorKey.currentState!.popUntil((route)=>route.isFirst);
   }
 }

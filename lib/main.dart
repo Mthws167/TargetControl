@@ -5,39 +5,48 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-Future main() async{
+Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    title: 'Target Control',
-    home: StreamBuilder<User?>(
-      stream: FirebaseAuth.instance.authStateChanges(),
-      builder: (context,snapshot){
-        if(snapshot.hasData){
-          return Counter();
-        }else{
-          return Login();
-        }
-      },
-    )
-  ));
+  await Firebase.initializeApp();
+  runApp(MyApp());
 }
 
-class TargetControl extends StatefulWidget {
+final navigatorKey = GlobalKey<NavigatorState>();
+
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) => MaterialApp(
+      navigatorKey: navigatorKey,
+      debugShowCheckedModeBanner: false,
+      home: TargetControl(),
+  );
+}
+
+
+class TargetControl extends StatelessWidget {
   const TargetControl({Key? key}) : super(key: key);
 
-  @override
-  State<TargetControl> createState() => _TargetControlState();
-}
 
-class _TargetControlState extends State<TargetControl> {
   @override
-  Widget build(BuildContext context) {
-      return MaterialApp(
+  Widget build(BuildContext context) => Scaffold(
+        body: StreamBuilder<User?>(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                    child: CircularProgressIndicator(
+                  color: Colors.deepPurpleAccent,
+                ));
+              } else if (snapshot.hasError) {
+                return Center(child: Text('Erro Inesperado!'));
+              } else if (snapshot.hasData) {
+                return Counter();
+              } else {
+                return Login();
+              }
+            }),
       );
-  }
 }

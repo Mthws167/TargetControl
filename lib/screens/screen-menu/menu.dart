@@ -1,8 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../screen-account/account.dart';
 import '../screen-chart/chart.dart';
-import '../screen-login/login.dart';
 
 class Menu extends StatefulWidget {
   const Menu({Key? key}) : super(key: key);
@@ -86,7 +86,8 @@ class _MenuState extends State<Menu> {
         break;
 
       case 2:
-        Navigator.of(context).pop();
+        FirebaseAuth.instance.signOut();
+        Navigator.of(context).pop;
         break;
     }
   }
