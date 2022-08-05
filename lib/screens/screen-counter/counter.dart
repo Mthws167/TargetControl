@@ -1,18 +1,14 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 import '../screen-menu/menu.dart';
 
-class Counter extends StatefulWidget {
+class Counter extends StatelessWidget {
   const Counter({Key? key}) : super(key: key);
 
-  @override
-  State<Counter> createState() => _CounterState();
-}
-
-class _CounterState extends State<Counter> {
   @override
   Widget build(BuildContext context) => WillPopScope(
       onWillPop: () async => false,
@@ -147,6 +143,7 @@ class _ProgressState extends State<ProgressBar> {
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser!;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[

@@ -41,7 +41,7 @@ class _MenuState extends State<Menu> {
               onClicked: ()=> selectedItem(context, 1),
             ),
             const SizedBox(
-              height: 500,
+              height: 400,
             ),
             Divider(color: Colors.white70),
             const SizedBox(
@@ -87,7 +87,6 @@ class _MenuState extends State<Menu> {
 
       case 2:
         FirebaseAuth.instance.signOut();
-        Navigator.of(context).pop;
         break;
     }
   }
