@@ -40,13 +40,7 @@ dependencies:
   cloud_firestore:
   firebase_auth:
   email_validator:
-  flutter_localizations:
-    sdk: flutter
-
-  i18n_extension: ^5.0.0
-
-dependency_overrides:
-  firebase_messaging_platform_interface: 4.1.0
+  charts_flutter:
 
 
 dev_dependencies:

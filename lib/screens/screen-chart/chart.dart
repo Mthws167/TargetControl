@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../screen-menu/menu.dart';
+
 class Chart extends StatelessWidget {
   const Chart({Key? key}) : super(key: key);
 
@@ -18,7 +20,7 @@ class Chart extends StatelessWidget {
           ),
           actions: [
            IconButton(
-             alignment: Alignment.centerLeft,
+             alignment: Alignment.topLeft,
               icon: Icon(Icons.arrow_back),
               onPressed: (){
                 Navigator.of(context).pop();

@@ -1,10 +1,8 @@
-import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../screen-chart/chart.dart';
-import '../screen-counter/counter.dart';
+
 
 class Menu extends StatefulWidget {
   const Menu({Key? key}) : super(key: key);
