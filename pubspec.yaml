@@ -40,7 +40,9 @@ dependencies:
   cloud_firestore:
   firebase_auth:
   email_validator:
-  charts_flutter:
+  pdf:
+  path_provider:
+  open_file: ^3.2.1
 
 
 dev_dependencies:

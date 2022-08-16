@@ -4,15 +4,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
+import '../../utils/pdf.dart';
+
 
 class Counter extends StatelessWidget {
-  const Counter({Key? key}) : super(key: key);
+  final user = FirebaseAuth.instance.currentUser!;
+  Counter({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
         appBar: AppBar(
+          title: Text(user.email!),
           backgroundColor: Colors.deepPurpleAccent,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
@@ -21,11 +25,12 @@ class Counter extends StatelessWidget {
           ),
           actions: [
             IconButton(
-                alignment: Alignment.topLeft,
+                alignment: Alignment.center,
                 icon: Icon(Icons.exit_to_app_outlined),
-                onPressed: (){
+                onPressed: () {
                   FirebaseAuth.instance.signOut();
-                })],
+                })
+          ],
         ),
         body: Center(
           child: Column(
@@ -193,7 +198,7 @@ class _ProgressState extends State<ProgressBar> {
                 style: const TextStyle(fontSize: 30),
               ),
               Container(
-                padding: const EdgeInsets.fromLTRB(80, 0, 0, 0),
+                padding: const EdgeInsets.fromLTRB(70, 0, 0, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       fixedSize: const Size(50, 50),
@@ -244,7 +249,7 @@ class _ProgressState extends State<ProgressBar> {
                 style: const TextStyle(fontSize: 30),
               ),
               Container(
-                padding: const EdgeInsets.fromLTRB(80, 0, 0, 0),
+                padding: const EdgeInsets.fromLTRB(70, 0, 0, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       fixedSize: const Size(50, 50),
@@ -295,7 +300,7 @@ class _ProgressState extends State<ProgressBar> {
                 style: const TextStyle(fontSize: 30),
               ),
               Container(
-                padding: const EdgeInsets.fromLTRB(80, 0, 0, 0),
+                padding: const EdgeInsets.fromLTRB(70, 0, 0, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       fixedSize: const Size(50, 50),
@@ -313,7 +318,29 @@ class _ProgressState extends State<ProgressBar> {
                 ),
               ),
             ])),
+        Container(
+          width: 300,
+          height: 35,
+          child: ElevatedButton(
+            child: const Text('Gerar relatório em PDF',
+                style: TextStyle(
+                  color: Colors.deepPurpleAccent,
+                )),
+
+            style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                        side: BorderSide(color: Colors.deepPurpleAccent)))),
+            onPressed: () async{
+            final pdfFile = await PdfApi.generateTable();
+            PdfApi.openFile(pdfFile);
+            },
+          ),
+        ),
       ],
     );
   }
+
 }
