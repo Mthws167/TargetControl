@@ -1,15 +1,31 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-class Chart extends StatefulWidget {
+import '../screen-menu/menu.dart';
+
+class Chart extends StatelessWidget {
   const Chart({Key? key}) : super(key: key);
 
   @override
-  State<Chart> createState() => _ChartState();
-}
+  Widget build(BuildContext context) => WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        endDrawer: Menu(),
+        appBar: AppBar(
+          backgroundColor: Colors.deepPurpleAccent,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(25),
+            ),
+          ),
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const <Widget>[
 
-class _ChartState extends State<Chart> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
+            ],
+          ),
+        ),
+      ));
 }

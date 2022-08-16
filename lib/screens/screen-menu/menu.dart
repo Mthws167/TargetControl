@@ -1,8 +1,10 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../screen-account/account.dart';
 import '../screen-chart/chart.dart';
+import '../screen-counter/counter.dart';
 
 class Menu extends StatefulWidget {
   const Menu({Key? key}) : super(key: key);
@@ -16,9 +18,9 @@ class _MenuState extends State<Menu> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      width: 185,
+      width: 190,
       child: Material(
-        color: const Color.fromRGBO(124, 77, 255, 1.0).withOpacity(0.9),
+        color: const Color.fromRGBO(124, 77, 255, 1.0).withOpacity(0.96),
         child: ListView(
           padding: padding,
           children: <Widget>[
@@ -26,14 +28,10 @@ class _MenuState extends State<Menu> {
               height: 70,
             ),
             Divider(color: Colors.white70),
-
             buildMenuItem(
-              text: 'Conta',
-              icon: Icons.account_circle_outlined,
+                text: 'Contador',
+                icon: Icons.add_chart_outlined,
               onClicked: ()=> selectedItem(context, 0),
-            ),
-            const SizedBox(
-              height: 20,
             ),
             buildMenuItem(
               text: 'Relatório',
@@ -78,7 +76,7 @@ class _MenuState extends State<Menu> {
     Navigator.of(context).pop();
     switch(index){
       case 0:
-        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Account()));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Counter()));
         break;
 
       case 1:

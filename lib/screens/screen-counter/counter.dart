@@ -96,6 +96,9 @@ class _ProgressState extends State<ProgressBar> {
 
   countMale() async {
     await _countRefMale.set(ServerValue.increment(1));
+    if (_countMale >= 100) {
+      _countRefMale.set(100);
+    }
   }
 
   countMinumMale() async {
@@ -118,6 +121,9 @@ class _ProgressState extends State<ProgressBar> {
 
   countFemale() async {
     await _countRefFemale.set(ServerValue.increment(1));
+    if (_countFemale >= 100) {
+      _countRefFemale.set(100);
+    }
   }
 
   countMinumChield() async {
@@ -131,6 +137,9 @@ class _ProgressState extends State<ProgressBar> {
 
   countChield() async {
     await _countRefChield.set(ServerValue.increment(1));
+    if (_countChield >= 100) {
+      _countRefChield.set(100);
+    }
   }
 
   @override
@@ -143,7 +152,6 @@ class _ProgressState extends State<ProgressBar> {
 
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser!;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[

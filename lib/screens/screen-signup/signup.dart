@@ -4,7 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../../main.dart';
-import '../../utils.dart';
+import '../../utils/utils.dart';
 
 class SignUp extends StatefulWidget {
   final VoidCallback onClickedSignIn;

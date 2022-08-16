@@ -1,6 +1,6 @@
 import 'package:countpeople/screens/authPage.dart';
 import 'package:countpeople/screens/screen-counter/counter.dart';
-import 'package:countpeople/utils.dart';
+import 'package:countpeople/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';

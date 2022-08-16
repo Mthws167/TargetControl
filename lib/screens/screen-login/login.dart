@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:countpeople/main.dart';
 
-import '../../utils.dart';
+import '../../utils/utils.dart';
 
 
 class Login extends StatefulWidget {
@@ -168,7 +168,6 @@ class _LoginState extends State<Login> {
       );
     } on FirebaseAuthException catch (e) {
       print(e);
-
       Utils.showSnackBar(e.message);
     }
 

@@ -6,7 +6,7 @@ class Utils{
   static showSnackBar(String? text){
     if(text==null) return;
 
-    final snackBar = SnackBar(content: Text(text,textAlign: TextAlign.center),backgroundColor: Colors.red,);
+    final snackBar = SnackBar(content: Text("Erro no e-mail ou senha!",textAlign: TextAlign.center),backgroundColor: Colors.red,);
 
     messengerKey.currentState!
       ..removeCurrentSnackBar()
