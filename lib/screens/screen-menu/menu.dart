@@ -34,13 +34,8 @@ class _MenuState extends State<Menu> {
               icon: Icons.add_chart_outlined,
               onClicked: () => selectedItem(context, 0),
             ),
-            buildMenuItem(
-              text: 'Relatório',
-              icon: Icons.pie_chart_sharp,
-              onClicked: () => selectedItem(context, 1),
-            ),
             const SizedBox(
-              height: 400,
+              height: 500,
             ),
             Divider(color: Colors.white70),
             const SizedBox(
@@ -49,7 +44,7 @@ class _MenuState extends State<Menu> {
             buildMenuItem(
               text: 'Sair',
               icon: Icons.exit_to_app,
-              onClicked: () => selectedItem(context, 2),
+              onClicked: () => selectedItem(context, 1),
             ),
           ],
         ),
@@ -83,15 +78,10 @@ class _MenuState extends State<Menu> {
     switch (index) {
       case 0:
         Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => Counter()));
-        break;
-
-      case 1:
-        Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => Chart()));
         break;
 
-      case 2:
+      case 1:
         FirebaseAuth.instance.signOut();
         Navigator.of(context).pop();
         break;

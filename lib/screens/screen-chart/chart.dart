@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../screen-menu/menu.dart';
-
 class Chart extends StatelessWidget {
   const Chart({Key? key}) : super(key: key);
 
