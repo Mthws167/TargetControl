@@ -1,9 +1,9 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
-import '../screen-menu/menu.dart';
 
 class Counter extends StatelessWidget {
   const Counter({Key? key}) : super(key: key);
@@ -12,7 +12,6 @@ class Counter extends StatelessWidget {
   Widget build(BuildContext context) => WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        endDrawer: Menu(),
         appBar: AppBar(
           backgroundColor: Colors.deepPurpleAccent,
           shape: const RoundedRectangleBorder(
@@ -20,6 +19,13 @@ class Counter extends StatelessWidget {
               bottom: Radius.circular(25),
             ),
           ),
+          actions: [
+            IconButton(
+                alignment: Alignment.topLeft,
+                icon: Icon(Icons.exit_to_app_outlined),
+                onPressed: (){
+                  FirebaseAuth.instance.signOut();
+                })],
         ),
         body: Center(
           child: Column(
@@ -158,7 +164,7 @@ class _ProgressState extends State<ProgressBar> {
           alignment: Alignment.center,
           child: const Text(
             'Homens',
-            style: TextStyle(fontSize: 30),
+            style: TextStyle(fontSize: 20),
           ),
         ),
         Container(
@@ -168,7 +174,7 @@ class _ProgressState extends State<ProgressBar> {
                 padding: const EdgeInsets.fromLTRB(30, 0, 80, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      fixedSize: const Size(60, 60),
+                      fixedSize: const Size(50, 50),
                       shape: const CircleBorder(
                           side: BorderSide(
                               width: 5, color: Colors.deepPurpleAccent)),
@@ -190,7 +196,7 @@ class _ProgressState extends State<ProgressBar> {
                 padding: const EdgeInsets.fromLTRB(80, 0, 0, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      fixedSize: const Size(60, 60),
+                      fixedSize: const Size(50, 50),
                       shape: const CircleBorder(
                           side: BorderSide(
                               width: 5, color: Colors.deepPurpleAccent)),
@@ -209,7 +215,7 @@ class _ProgressState extends State<ProgressBar> {
           alignment: Alignment.center,
           child: const Text(
             'Mulheres',
-            style: TextStyle(fontSize: 30),
+            style: TextStyle(fontSize: 20),
           ),
         ),
         Container(
@@ -219,7 +225,7 @@ class _ProgressState extends State<ProgressBar> {
                 padding: const EdgeInsets.fromLTRB(30, 0, 80, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      fixedSize: const Size(60, 60),
+                      fixedSize: const Size(50, 50),
                       shape: const CircleBorder(
                           side: BorderSide(
                               width: 5, color: Colors.deepPurpleAccent)),
@@ -241,7 +247,7 @@ class _ProgressState extends State<ProgressBar> {
                 padding: const EdgeInsets.fromLTRB(80, 0, 0, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      fixedSize: const Size(60, 60),
+                      fixedSize: const Size(50, 50),
                       shape: const CircleBorder(
                           side: BorderSide(
                               width: 5, color: Colors.deepPurpleAccent)),
@@ -260,7 +266,7 @@ class _ProgressState extends State<ProgressBar> {
           alignment: Alignment.center,
           child: const Text(
             'Crianças',
-            style: TextStyle(fontSize: 30),
+            style: TextStyle(fontSize: 20),
           ),
         ),
         Container(
@@ -270,7 +276,7 @@ class _ProgressState extends State<ProgressBar> {
                 padding: EdgeInsets.fromLTRB(30, 0, 80, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      fixedSize: const Size(60, 60),
+                      fixedSize: const Size(50, 50),
                       shape: const CircleBorder(
                           side: BorderSide(
                               width: 5, color: Colors.deepPurpleAccent)),
@@ -292,7 +298,7 @@ class _ProgressState extends State<ProgressBar> {
                 padding: const EdgeInsets.fromLTRB(80, 0, 0, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      fixedSize: const Size(60, 60),
+                      fixedSize: const Size(50, 50),
                       shape: const CircleBorder(
                           side: BorderSide(
                               width: 5, color: Colors.deepPurpleAccent)),
