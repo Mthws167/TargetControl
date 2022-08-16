@@ -14,7 +14,8 @@ class Menu extends StatefulWidget {
 }
 
 class _MenuState extends State<Menu> {
-  final padding  = const EdgeInsets.symmetric(horizontal: 20);
+  final padding = const EdgeInsets.symmetric(horizontal: 20);
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -29,14 +30,14 @@ class _MenuState extends State<Menu> {
             ),
             Divider(color: Colors.white70),
             buildMenuItem(
-                text: 'Contador',
-                icon: Icons.add_chart_outlined,
-              onClicked: ()=> selectedItem(context, 0),
+              text: 'Contador',
+              icon: Icons.add_chart_outlined,
+              onClicked: () => selectedItem(context, 0),
             ),
             buildMenuItem(
               text: 'Relatório',
               icon: Icons.pie_chart_sharp,
-              onClicked: ()=> selectedItem(context, 1),
+              onClicked: () => selectedItem(context, 1),
             ),
             const SizedBox(
               height: 400,
@@ -48,7 +49,7 @@ class _MenuState extends State<Menu> {
             buildMenuItem(
               text: 'Sair',
               icon: Icons.exit_to_app,
-              onClicked: ()=> selectedItem(context, 2),
+              onClicked: () => selectedItem(context, 2),
             ),
           ],
         ),
@@ -65,34 +66,35 @@ class _MenuState extends State<Menu> {
     const hoverColor = Colors.white70;
 
     return ListTile(
-      leading: Icon(icon,color: color,),
-      title: Text(text,style: const TextStyle(color: color),),
+      leading: Icon(
+        icon,
+        color: color,
+      ),
+      title: Text(
+        text,
+        style: const TextStyle(color: color),
+      ),
       hoverColor: hoverColor,
       onTap: onClicked,
     );
   }
 
-  void selectedItem(BuildContext context, int index){
-    Navigator.of(context).pop();
-    switch(index){
+  void selectedItem(BuildContext context, int index) {
+    switch (index) {
       case 0:
-        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Counter()));
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => Counter()));
         break;
 
       case 1:
-        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Chart()));
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => Chart()));
         break;
 
       case 2:
         FirebaseAuth.instance.signOut();
-        if( FirebaseAuth.instance.signOut()==true) {
-         break;
-        }else {
-          Navigator.of(context).pop();
-          break;
-        }
-
-        }
+        Navigator.of(context).pop();
+        break;
     }
   }
-
+}

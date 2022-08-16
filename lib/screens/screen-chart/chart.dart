@@ -10,14 +10,21 @@ class Chart extends StatelessWidget {
   Widget build(BuildContext context) => WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        endDrawer: Menu(),
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: Colors.deepPurpleAccent,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(25),
             ),
           ),
+          actions: [
+           IconButton(
+             alignment: Alignment.centerLeft,
+              icon: Icon(Icons.arrow_back),
+              onPressed: (){
+                Navigator.of(context).pop();
+              })],
         ),
         body: Center(
           child: Column(
