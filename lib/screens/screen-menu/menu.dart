@@ -85,6 +85,7 @@ class _MenuState extends State<Menu> {
 
       case 2:
         FirebaseAuth.instance.signOut();
+        Navigator.of(context).pop();
         break;
     }
   }

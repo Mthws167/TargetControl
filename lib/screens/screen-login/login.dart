@@ -32,7 +32,7 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) => WillPopScope(
       onWillPop: () async {
         final difference = DateTime.now().difference(timeBackPressed);
-        final isExitWarning = difference >= const Duration(seconds: 3);
+        final isExitWarning = difference >= const Duration(seconds: 1);
 
         timeBackPressed = DateTime.now();
 
