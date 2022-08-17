@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
-class Utils{
+class Utils {
   static final messengerKey = GlobalKey<ScaffoldMessengerState>();
 
-  static showSnackBar(String? text){
-    if(text==null) return;
+  static showSnackBar(String? text) {
+    if (text == null) return;
 
-    final snackBar = SnackBar(content: Text("Erro no e-mail ou senha!",textAlign: TextAlign.center),backgroundColor: Colors.red,);
+    const snackBar = SnackBar(
+      content: Text("Erro no e-mail ou senha!", textAlign: TextAlign.center),
+      backgroundColor: Colors.red,
+    );
 
     messengerKey.currentState!
       ..removeCurrentSnackBar()

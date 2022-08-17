@@ -12,12 +12,14 @@ Future main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) => MaterialApp(
         scaffoldMessengerKey: Utils.messengerKey,
@@ -31,20 +33,24 @@ class TargetControl extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         body: StreamBuilder<User?>(
-            stream: FirebaseAuth.instance.authStateChanges(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                    child: CircularProgressIndicator(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(
                   color: Colors.deepPurpleAccent,
-                ));
-              } else if (snapshot.hasError) {
-                return Center(child: Text('Erro Inesperado!'));
-              } else if (snapshot.hasData) {
-                return Counter();
-              } else {
-                return AuthPage();
-              }
-            }),
+                ),
+              );
+            } else if (snapshot.hasError) {
+              return const Center(
+                child: Text('Erro Inesperado!'),
+              );
+            } else if (snapshot.hasData) {
+              return Counter();
+            } else {
+              return const AuthPage();
+            }
+          },
+        ),
       );
 }

@@ -1,74 +1,34 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class Counter extends StatelessWidget {
+class PDFPage extends StatelessWidget {
   final user = FirebaseAuth.instance.currentUser!;
-  Counter({Key? key}) : super(key: key);
+
+  PDFPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => WillPopScope(
-      onWillPop: () async => false,
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.deepPurpleAccent,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(25),
+        onWillPop: () async => false,
+        child: Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            backgroundColor: Colors.deepPurpleAccent,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(25),
+              ),
             ),
           ),
-          actions: [
-            IconButton(
-                alignment: Alignment.center,
-                icon: Icon(Icons.exit_to_app_outlined),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                })
-          ],
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const <Widget>[
-              PDFState(),
-            ],
-          ),
-        ),
-      ));
-}
-
-class PDF extends StatelessWidget {
-  PDF({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) => WillPopScope(
-      onWillPop: () async => false,
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.deepPurpleAccent,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(25),
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const <Widget>[
+                PDFState(),
+              ],
             ),
           ),
-          actions: [
-            IconButton(
-                alignment: Alignment.center,
-                icon: Icon(Icons.exit_to_app_outlined),
-                onPressed: () {
-                  FirebaseAuth.instance.signOut();
-                })
-          ],
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const <Widget>[
-              PDFState(),
-            ],
-          ),
-        ),
-      ));
+      );
 }
 
 class PDFState extends StatefulWidget {
@@ -86,14 +46,7 @@ class _PDFBody extends State<PDFState> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Container(
-          alignment: Alignment.center,
-          child: const Text(
-            'Homens',
-            style: TextStyle(fontSize: 20),
-          ),
-        ),
-        Container(
+        SizedBox(
           width: 200,
           height: 35,
           child: ElevatedButton(
@@ -101,20 +54,48 @@ class _PDFBody extends State<PDFState> {
                 style: TextStyle(
                   color: Colors.deepPurpleAccent,
                 )),
-
             style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                        side: BorderSide(color: Colors.deepPurpleAccent)))),
-            onPressed: () async{
-
+              backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                  side: const BorderSide(color: Colors.deepPurpleAccent),
+                ),
+              ),
+            ),
+            onPressed: () async {},
+          ),
+        ),
+        Container(
+          height: 15,
+        ),
+        SizedBox(
+          width: 200,
+          height: 35,
+          child: ElevatedButton.icon(
+            label: const Text('Voltar para o início',
+                style: TextStyle(
+                  color: Colors.deepPurpleAccent,
+                )),
+            icon: const Icon(
+              Icons.keyboard_return,
+              color: Colors.deepPurpleAccent,
+            ),
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                  side: const BorderSide(color: Colors.deepPurpleAccent),
+                ),
+              ),
+            ),
+            onPressed: () async {
+              Navigator.of(context).pop();
             },
           ),
         ),
       ],
     );
   }
-
 }
