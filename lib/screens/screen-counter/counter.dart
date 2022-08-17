@@ -3,8 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-
-import '../../utils/pdf.dart';
+import '../screen-pdf/pdf.dart';
 
 
 class Counter extends StatelessWidget {
@@ -173,7 +172,7 @@ class _ProgressState extends State<ProgressBar> {
           ),
         ),
         Container(
-            padding: const EdgeInsets.fromLTRB(20, 0, 20, 100),
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 50),
             child: Row(children: <Widget>[
               Container(
                 padding: const EdgeInsets.fromLTRB(30, 0, 80, 0),
@@ -224,7 +223,7 @@ class _ProgressState extends State<ProgressBar> {
           ),
         ),
         Container(
-            padding: const EdgeInsets.fromLTRB(20, 0, 20, 100),
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 50),
             child: Row(children: <Widget>[
               Container(
                 padding: const EdgeInsets.fromLTRB(30, 0, 80, 0),
@@ -275,7 +274,7 @@ class _ProgressState extends State<ProgressBar> {
           ),
         ),
         Container(
-            padding: const EdgeInsets.fromLTRB(20, 0, 20, 100),
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 80),
             child: Row(children: <Widget>[
               Container(
                 padding: EdgeInsets.fromLTRB(30, 0, 80, 0),
@@ -319,10 +318,10 @@ class _ProgressState extends State<ProgressBar> {
               ),
             ])),
         Container(
-          width: 300,
+          width: 250,
           height: 35,
           child: ElevatedButton(
-            child: const Text('Gerar relatório em PDF',
+            child: const Text('Relatório em PDF? Clique Aqui',
                 style: TextStyle(
                   color: Colors.deepPurpleAccent,
                 )),
@@ -334,8 +333,7 @@ class _ProgressState extends State<ProgressBar> {
                         borderRadius: BorderRadius.circular(20.0),
                         side: BorderSide(color: Colors.deepPurpleAccent)))),
             onPressed: () async{
-            final pdfFile = await PdfApi.generateTable();
-            PdfApi.openFile(pdfFile);
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PDF()));
             },
           ),
         ),
