@@ -1,10 +1,12 @@
+import 'dart:html';
+
+import 'package:countpeople/screens/screen-pdf/pdf_invoice_api.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:open_file/open_file.dart';
 
 class PDFPage extends StatelessWidget {
-  final user = FirebaseAuth.instance.currentUser!;
-
-  PDFPage({Key? key}) : super(key: key);
+  const PDFPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => WillPopScope(
@@ -23,7 +25,7 @@ class PDFPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const <Widget>[
-                PDFState(),
+                  PDFState(),
               ],
             ),
           ),
@@ -41,6 +43,7 @@ class PDFState extends StatefulWidget {
 }
 
 class _PDFBody extends State<PDFState> {
+  final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -63,7 +66,37 @@ class _PDFBody extends State<PDFState> {
                 ),
               ),
             ),
-            onPressed: () async {},
+            onPressed: () async {
+              final date  = DateTime.now().toLocal();
+              final invoice = Invoice(
+                supplier: Supplier(
+                  address: Text(user.email!),
+                ),
+                info: InvoiceInfo(
+                  date: date,
+                ),
+                items:[
+                  InvoiceItem(
+                    description:'Homens',
+                    date:date,
+                    quantity:
+                  ),
+                  InvoiceItem(
+                      description:'Mulheres',
+                      date:date,
+                      quantity:
+                  ),
+                  InvoiceItem(
+                      description:'Crianças',
+                      date:date,
+                      quantity:
+                  ),
+                ],
+              );
+
+              final pdfFile = await PdfInvoiceApi.generate(invoice);
+              PdfApi.openFile(pdfFile);
+            },
           ),
         ),
         Container(
@@ -97,5 +130,11 @@ class _PDFBody extends State<PDFState> {
         ),
       ],
     );
+  }
+
+  static Future openFile(File file) async{
+    final url = file.path;
+
+    await OpenFile.open(url);
   }
 }
