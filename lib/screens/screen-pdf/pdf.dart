@@ -1,9 +1,6 @@
-import 'dart:html';
-
-import 'package:countpeople/screens/screen-pdf/pdf_invoice_api.dart';
+import 'package:countpeople/screens/screen-pdf/pdf_api.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:open_file/open_file.dart';
 
 class PDFPage extends StatelessWidget {
   const PDFPage({Key? key}) : super(key: key);
@@ -53,10 +50,6 @@ class _PDFBody extends State<PDFState> {
           width: 200,
           height: 35,
           child: ElevatedButton(
-            child: const Text('Gerar relatório em PDF',
-                style: TextStyle(
-                  color: Colors.deepPurpleAccent,
-                )),
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -67,36 +60,14 @@ class _PDFBody extends State<PDFState> {
               ),
             ),
             onPressed: () async {
-              final date  = DateTime.now().toLocal();
-              final invoice = Invoice(
-                supplier: Supplier(
-                  address: Text(user.email!),
-                ),
-                info: InvoiceInfo(
-                  date: date,
-                ),
-                items:[
-                  InvoiceItem(
-                    description:'Homens',
-                    date:date,
-                    quantity:
-                  ),
-                  InvoiceItem(
-                      description:'Mulheres',
-                      date:date,
-                      quantity:
-                  ),
-                  InvoiceItem(
-                      description:'Crianças',
-                      date:date,
-                      quantity:
-                  ),
-                ],
-              );
+             final pdfFile =  await PdfApi.generateCenteredText(user.email!);
 
-              final pdfFile = await PdfInvoiceApi.generate(invoice);
               PdfApi.openFile(pdfFile);
             },
+            child: const Text('Gerar relatório em PDF',
+                style: TextStyle(
+                  color: Colors.deepPurpleAccent,
+                )),
           ),
         ),
         Container(
@@ -130,11 +101,5 @@ class _PDFBody extends State<PDFState> {
         ),
       ],
     );
-  }
-
-  static Future openFile(File file) async{
-    final url = file.path;
-
-    await OpenFile.open(url);
   }
 }
