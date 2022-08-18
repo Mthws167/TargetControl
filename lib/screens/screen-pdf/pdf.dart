@@ -60,7 +60,7 @@ class _PDFBody extends State<PDFState> {
               ),
             ),
             onPressed: () async {
-             final pdfFile =  await PdfApi.generateCenteredText(user.email!);
+             final pdfFile =  await PdfApi.generate();
 
               PdfApi.openFile(pdfFile);
             },
