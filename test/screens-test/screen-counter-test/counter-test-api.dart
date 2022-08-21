@@ -11,18 +11,18 @@ void main() {
           test(
             'Test "+" counter ',
             () {
-              CounterApi counterApi = CounterApi(value: 0);
+              CounterApi counterApi = CounterApi(valueMale: 0);
               counterApi.incrementCounter();
-              expect(counterApi.value, 1);
+              expect(counterApi.valueMale, 1);
             },
           );
 
           test(
             'Test "+" max counter ',
             () {
-              CounterApi counterApi = CounterApi(value: 100);
+              CounterApi counterApi = CounterApi(valueMale: 100);
               counterApi.incrementCounter();
-              expect(counterApi.value, 101);
+              expect(counterApi.valueMale, 101);
             },
           );
         },
@@ -34,18 +34,18 @@ void main() {
           test(
             'Test "-" counter ',
             () {
-              CounterApi counterApi = CounterApi(value: 1);
+              CounterApi counterApi = CounterApi(valueMale: 1);
               counterApi.decrementCounter();
-              expect(counterApi.value, 0);
+              expect(counterApi.valueMale, 0);
             },
           );
 
           test(
             'Test "-" max counter ',
             () {
-              CounterApi counterApi = CounterApi(value: 0);
+              CounterApi counterApi = CounterApi(valueMale: 0);
               counterApi.decrementCounter();
-              expect(counterApi.value, -1);
+              expect(counterApi.valueMale, -1);
             },
           );
         },
@@ -60,18 +60,18 @@ void main() {
               test(
                 'Test "+" counter ',
                 () {
-                  CounterApi counterApi = CounterApi(value: 4);
+                  CounterApi counterApi = CounterApi(valueFemale: 4);
                   counterApi.incrementCounter();
-                  expect(counterApi.value, 5);
+                  expect(counterApi.valueFemale, 5);
                 },
               );
 
               test(
                 'Test "+" max counter ',
                 () {
-                  CounterApi counterApi = CounterApi(value: 100);
+                  CounterApi counterApi = CounterApi(valueFemale: 100);
                   counterApi.incrementCounter();
-                  expect(counterApi.value, 101);
+                  expect(counterApi.valueFemale, 101);
                 },
               );
             },
@@ -83,18 +83,18 @@ void main() {
               test(
                 'Test "-" counter ',
                 () {
-                  CounterApi counterApi = CounterApi(value: 3);
+                  CounterApi counterApi = CounterApi(valueFemale: 3);
                   counterApi.decrementCounter();
-                  expect(counterApi.value, 2);
+                  expect(counterApi.valueFemale, 2);
                 },
               );
 
               test(
                 'Test "-" max counter ',
                 () {
-                  CounterApi counterApi = CounterApi(value: 0);
+                  CounterApi counterApi = CounterApi(valueFemale: 0);
                   counterApi.decrementCounter();
-                  expect(counterApi.value, -1);
+                  expect(counterApi.valueFemale, -1);
                 },
               );
             },
@@ -109,18 +109,18 @@ void main() {
                   test(
                     'Test "+" counter ',
                     () {
-                      CounterApi counterApi = CounterApi(value: 10);
+                      CounterApi counterApi = CounterApi(valueChield: 10);
                       counterApi.incrementCounter();
-                      expect(counterApi.value, 11);
+                      expect(counterApi.valueChield, 11);
                     },
                   );
 
                   test(
                     'Test "+" max counter ',
                     () {
-                      CounterApi counterApi = CounterApi(value: 100);
+                      CounterApi counterApi = CounterApi(valueChield: 100);
                       counterApi.incrementCounter();
-                      expect(counterApi.value, 101);
+                      expect(counterApi.valueChield, 101);
                     },
                   );
                 },
@@ -132,18 +132,18 @@ void main() {
                   test(
                     'Test "-" counter ',
                     () {
-                      CounterApi counterApi = CounterApi(value: 11);
+                      CounterApi counterApi = CounterApi(valueChield: 11);
                       counterApi.decrementCounter();
-                      expect(counterApi.value, 10);
+                      expect(counterApi.valueChield, 10);
                     },
                   );
 
                   test(
                     'Test "-" max counter ',
                     () {
-                      CounterApi counterApi = CounterApi(value: 0);
+                      CounterApi counterApi = CounterApi(valueChield: 0);
                       counterApi.decrementCounter();
-                      expect(counterApi.value, -1);
+                      expect(counterApi.valueChield, -1);
                     },
                   );
                 },
