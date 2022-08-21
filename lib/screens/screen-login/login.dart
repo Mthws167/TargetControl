@@ -106,6 +106,7 @@ class _LoginState extends State<Login> {
                   height: 60,
                   child: SizedBox.expand(
                     child: TextButton(
+                      onPressed: signIn,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: const <Widget>[
@@ -120,7 +121,6 @@ class _LoginState extends State<Login> {
                           ),
                         ],
                       ),
-                      onPressed: signIn,
                     ),
                   ),
                 ),

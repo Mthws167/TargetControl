@@ -49,14 +49,14 @@ class ProgressBar extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return _ProgressState();
+    return ProgressState();
   }
 }
 
-class _ProgressState extends State<ProgressBar> {
-  int _countMale = 0;
-  int _countFemale = 0;
-  int _countChield = 0;
+class ProgressState extends State<ProgressBar> {
+  late int countMale;
+  late int countFemale;
+  late int countChield;
   late final DatabaseReference _countRefMale;
   late StreamSubscription<DatabaseEvent> _countSubscriptionMale;
   late final DatabaseReference _countRefFemale;
@@ -78,9 +78,9 @@ class _ProgressState extends State<ProgressBar> {
       final countSnapshotMale = await _countRefMale.get();
       final countSnapshotFemale = await _countRefFemale.get();
       final countSnapshotChield = await _countRefChield.get();
-      _countMale = countSnapshotMale.value as int;
-      _countFemale = countSnapshotFemale.value as int;
-      _countChield = countSnapshotChield.value as int;
+      countMale = countSnapshotMale.value as int;
+      countFemale = countSnapshotFemale.value as int;
+      countChield = countSnapshotChield.value as int;
     } catch (err) {
       debugPrint(err.toString());
     }
@@ -89,7 +89,7 @@ class _ProgressState extends State<ProgressBar> {
       (DatabaseEvent event) {
         setState(
           () {
-            _countMale = (event.snapshot.value ?? 0) as int;
+            countMale = (event.snapshot.value ?? 0) as int;
           },
         );
       },
@@ -98,7 +98,7 @@ class _ProgressState extends State<ProgressBar> {
       (DatabaseEvent event) {
         setState(
           () {
-            _countFemale = (event.snapshot.value ?? 0) as int;
+            countFemale = (event.snapshot.value ?? 0) as int;
           },
         );
       },
@@ -107,57 +107,57 @@ class _ProgressState extends State<ProgressBar> {
       (DatabaseEvent event) {
         setState(
           () {
-            _countChield = (event.snapshot.value ?? 0) as int;
+            countChield = (event.snapshot.value ?? 0) as int;
           },
         );
       },
     );
   }
 
-  countMale() async {
+  countMaxMale() async {
     await _countRefMale.set(ServerValue.increment(1));
-    if (_countMale >= 100) {
+    if (countMale >= 100) {
       _countRefMale.set(100);
     }
   }
 
   countMinumMale() async {
-    if (_countMale > 0 && _countMale != 0) {
+    if (countMale > 0 && countMale != 0) {
       await _countRefMale.set(ServerValue.increment(-1));
     }
-    if (_countMale <= 0) {
+    if (countMale <= 0) {
       _countRefMale.set(0);
     }
   }
 
   countMinumFemale() async {
-    if (_countFemale > 0 && _countFemale != 0) {
+    if (countFemale > 0 && countFemale != 0) {
       await _countRefFemale.set(ServerValue.increment(-1));
     }
-    if (_countFemale <= 0) {
+    if (countFemale <= 0) {
       _countRefFemale.set(0);
     }
   }
 
-  countFemale() async {
+  countMaxFemale() async {
     await _countRefFemale.set(ServerValue.increment(1));
-    if (_countFemale >= 100) {
+    if (countFemale >= 100) {
       _countRefFemale.set(100);
     }
   }
 
   countMinumChield() async {
-    if (_countChield > 0 && _countChield != 0) {
+    if (countChield > 0 && countChield != 0) {
       await _countRefChield.set(ServerValue.increment(-1));
     }
-    if (_countChield <= 0) {
+    if (countChield <= 0) {
       _countRefChield.set(0);
     }
   }
 
-  countChield() async {
+  countMaxChield() async {
     await _countRefChield.set(ServerValue.increment(1));
-    if (_countChield >= 100) {
+    if (countChield >= 100) {
       _countRefChield.set(100);
     }
   }
@@ -201,12 +201,12 @@ class _ProgressState extends State<ProgressBar> {
                     color: Colors.deepPurpleAccent,
                   ),
                   onPressed: () {
-                    countMale();
+                    countMaxMale();
                   },
                 ),
               ),
               Text(
-                _countMale.toString(),
+                countMale.toString(),
                 style: const TextStyle(fontSize: 30),
               ),
               Container(
@@ -257,12 +257,12 @@ class _ProgressState extends State<ProgressBar> {
                     color: Colors.deepPurpleAccent,
                   ),
                   onPressed: () {
-                    countFemale();
+                    countMaxFemale();
                   },
                 ),
               ),
               Text(
-                _countFemale.toString(),
+                countFemale.toString(),
                 style: const TextStyle(fontSize: 30),
               ),
               Container(
@@ -313,12 +313,12 @@ class _ProgressState extends State<ProgressBar> {
                     color: Colors.deepPurpleAccent,
                   ),
                   onPressed: () {
-                    countChield();
+                    countMaxChield();
                   },
                 ),
               ),
               Text(
-                _countChield.toString(),
+                countChield.toString(),
                 style: const TextStyle(fontSize: 30),
               ),
               Container(
@@ -347,12 +347,6 @@ class _ProgressState extends State<ProgressBar> {
           width: 250,
           height: 35,
           child: ElevatedButton(
-            child: const Text(
-              'Relatório em PDF? Clique Aqui',
-              style: TextStyle(
-                color: Colors.deepPurpleAccent,
-              ),
-            ),
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -369,6 +363,12 @@ class _ProgressState extends State<ProgressBar> {
                 ),
               );
             },
+            child: const Text(
+              'Relatório em PDF? Clique Aqui',
+              style: TextStyle(
+                color: Colors.deepPurpleAccent,
+              ),
+            ),
           ),
         ),
       ],
