@@ -32,15 +32,14 @@ class Counter extends StatelessWidget {
               )
             ],
           ),
-          body: Center(
-            child: Column(
+          body: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const <Widget>[
                 ProgressBar(),
               ],
             ),
           ),
-        ),
+
       );
 }
 
@@ -54,9 +53,9 @@ class ProgressBar extends StatefulWidget {
 }
 
 class ProgressState extends State<ProgressBar> {
-  late int countMale;
-  late int countFemale;
-  late int countChield;
+  late int countMale=0;
+  late int countFemale=0;
+  late int countChield=0;
   late final DatabaseReference _countRefMale;
   late StreamSubscription<DatabaseEvent> _countSubscriptionMale;
   late final DatabaseReference _countRefFemale;
