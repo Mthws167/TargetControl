@@ -33,13 +33,12 @@ class Counter extends StatelessWidget {
             ],
           ),
           body: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const <Widget>[
-                ProgressBar(),
-              ],
-            ),
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const <Widget>[
+              ProgressBar(),
+            ],
           ),
-
+        ),
       );
 }
 
@@ -53,9 +52,11 @@ class ProgressBar extends StatefulWidget {
 }
 
 class ProgressState extends State<ProgressBar> {
-  late int countMale=0;
-  late int countFemale=0;
-  late int countChield=0;
+  late int countMale = 0;
+  late int countFemale = 0;
+  late int countChield = 0;
+  late int total = countMale + countFemale + countChield;
+  late int quantidadeMax = 100;
   late final DatabaseReference _countRefMale;
   late StreamSubscription<DatabaseEvent> _countSubscriptionMale;
   late final DatabaseReference _countRefFemale;
@@ -114,9 +115,9 @@ class ProgressState extends State<ProgressBar> {
   }
 
   countMaxMale() async {
-    await _countRefMale.set(ServerValue.increment(1));
-    if (countMale >= 100) {
-      _countRefMale.set(100);
+    total = countMale + countFemale + countChield;
+    if (total < quantidadeMax) {
+      await _countRefMale.set(ServerValue.increment(1));
     }
   }
 
@@ -129,6 +130,13 @@ class ProgressState extends State<ProgressBar> {
     }
   }
 
+  countMaxFemale() async {
+    total = countMale + countFemale + countChield;
+    if (total < quantidadeMax) {
+      await _countRefFemale.set(ServerValue.increment(1));
+    }
+  }
+
   countMinumFemale() async {
     if (countFemale > 0 && countFemale != 0) {
       await _countRefFemale.set(ServerValue.increment(-1));
@@ -138,10 +146,10 @@ class ProgressState extends State<ProgressBar> {
     }
   }
 
-  countMaxFemale() async {
-    await _countRefFemale.set(ServerValue.increment(1));
-    if (countFemale >= 100) {
-      _countRefFemale.set(100);
+  countMaxChield() async {
+    total = countMale + countFemale + countChield;
+    if (total < quantidadeMax) {
+      await _countRefChield.set(ServerValue.increment(1));
     }
   }
 
@@ -151,13 +159,6 @@ class ProgressState extends State<ProgressBar> {
     }
     if (countChield <= 0) {
       _countRefChield.set(0);
-    }
-  }
-
-  countMaxChield() async {
-    await _countRefChield.set(ServerValue.increment(1));
-    if (countChield >= 100) {
-      _countRefChield.set(100);
     }
   }
 
