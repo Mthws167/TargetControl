@@ -1,59 +1,46 @@
 import 'dart:async';
 
 import 'package:countpeople/screens/screen-pdf/pdf.dart';
-import 'package:countpeople/screens/screen-profile/profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import '../screen-profile/profile.dart';
 
-class Counter extends StatelessWidget {
+class Profile extends StatelessWidget {
   final user = FirebaseAuth.instance.currentUser!;
 
-  Counter({Key? key}) : super(key: key);
+  Profile({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => WillPopScope(
-        onWillPop: () async => false,
-        child: Scaffold(
-          appBar: AppBar(
-            title: TextButton(
-              onPressed: ()=>  Navigator.push(context,MaterialPageRoute(builder: (context) => Profile())),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(user.email!),
-                ],
-              ),
-            ),
-            backgroundColor: Colors.deepPurpleAccent,
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(
-                bottom: Radius.circular(25),
-              ),
-            ),
-            actions: [
-              IconButton(
-                alignment: Alignment.center,
-                icon: const Icon(Icons.exit_to_app_outlined),
-                onPressed: () {
-                  FirebaseAuth.instance.signOut();
-                },
-              )
-            ],
-          ),
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const <Widget>[
-              ProgressBar(),
-            ],
+  Widget build(BuildContext context) => Scaffold(
+      appBar: AppBar(
+        title: Text(user.email!),
+        backgroundColor: Colors.deepPurpleAccent,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(25),
           ),
         ),
-      );
+        // actions: [
+        //   IconButton(
+        //     alignment: Alignment.center,
+        //     icon: const Icon(Icons.exit_to_app_outlined),
+        //     onPressed: () {
+        //       FirebaseAuth.instance.signOut();
+        //     },
+        //   )
+        // ],
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const <Widget>[
+          ProfileData(),
+        ],
+      ),
+    );
 }
 
-class ProgressBar extends StatefulWidget {
-  const ProgressBar({Key? key}) : super(key: key);
+class ProfileData extends StatefulWidget {
+  const ProfileData({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -61,125 +48,7 @@ class ProgressBar extends StatefulWidget {
   }
 }
 
-class ProgressState extends State<ProgressBar> {
-  late int countMale = 0;
-  late int countFemale = 0;
-  late int countChield = 0;
-  late int total = countMale + countFemale + countChield;
-  late int quantidadeMax = 100;
-  late final DatabaseReference _countRefMale;
-  late StreamSubscription<DatabaseEvent> _countSubscriptionMale;
-  late final DatabaseReference _countRefFemale;
-  late StreamSubscription<DatabaseEvent> _countSubscriptionFemale;
-  late final DatabaseReference _countRefChield;
-  late StreamSubscription<DatabaseEvent> _countSubscriptionChield;
-
-  @override
-  void initState() {
-    super.initState();
-    init();
-  }
-
-  init() async {
-    _countRefMale = FirebaseDatabase.instance.ref('countMale');
-    _countRefFemale = FirebaseDatabase.instance.ref('countFemale');
-    _countRefChield = FirebaseDatabase.instance.ref('countChield');
-    try {
-      final countSnapshotMale = await _countRefMale.get();
-      final countSnapshotFemale = await _countRefFemale.get();
-      final countSnapshotChield = await _countRefChield.get();
-      countMale = countSnapshotMale.value as int;
-      countFemale = countSnapshotFemale.value as int;
-      countChield = countSnapshotChield.value as int;
-    } catch (err) {
-      debugPrint(err.toString());
-    }
-
-    _countSubscriptionMale = _countRefMale.onValue.listen(
-      (DatabaseEvent event) {
-        setState(
-          () {
-            countMale = (event.snapshot.value ?? 0) as int;
-          },
-        );
-      },
-    );
-    _countSubscriptionFemale = _countRefFemale.onValue.listen(
-      (DatabaseEvent event) {
-        setState(
-          () {
-            countFemale = (event.snapshot.value ?? 0) as int;
-          },
-        );
-      },
-    );
-    _countSubscriptionChield = _countRefChield.onValue.listen(
-      (DatabaseEvent event) {
-        setState(
-          () {
-            countChield = (event.snapshot.value ?? 0) as int;
-          },
-        );
-      },
-    );
-  }
-
-  countMaxMale() async {
-    total = countMale + countFemale + countChield;
-    if (total < quantidadeMax) {
-      await _countRefMale.set(ServerValue.increment(1));
-    }
-  }
-
-  countMinumMale() async {
-    if (countMale > 0 && countMale != 0) {
-      await _countRefMale.set(ServerValue.increment(-1));
-    }
-    if (countMale <= 0) {
-      _countRefMale.set(0);
-    }
-  }
-
-  countMaxFemale() async {
-    total = countMale + countFemale + countChield;
-    if (total < quantidadeMax) {
-      await _countRefFemale.set(ServerValue.increment(1));
-    }
-  }
-
-  countMinumFemale() async {
-    if (countFemale > 0 && countFemale != 0) {
-      await _countRefFemale.set(ServerValue.increment(-1));
-    }
-    if (countFemale <= 0) {
-      _countRefFemale.set(0);
-    }
-  }
-
-  countMaxChield() async {
-    total = countMale + countFemale + countChield;
-    if (total < quantidadeMax) {
-      await _countRefChield.set(ServerValue.increment(1));
-    }
-  }
-
-  countMinumChield() async {
-    if (countChield > 0 && countChield != 0) {
-      await _countRefChield.set(ServerValue.increment(-1));
-    }
-    if (countChield <= 0) {
-      _countRefChield.set(0);
-    }
-  }
-
-  @override
-  void dispose() {
-    _countSubscriptionMale.cancel();
-    _countSubscriptionFemale.cancel();
-    _countSubscriptionChield.cancel();
-    super.dispose();
-  }
-
+class ProgressState extends State<ProfileData> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -211,14 +80,11 @@ class ProgressState extends State<ProgressBar> {
                     color: Colors.deepPurpleAccent,
                   ),
                   onPressed: () {
-                    countMaxMale();
+
                   },
                 ),
               ),
-              Text(
-                countMale.toString(),
-                style: const TextStyle(fontSize: 30),
-              ),
+
               Container(
                 padding: const EdgeInsets.fromLTRB(70, 0, 0, 0),
                 child: ElevatedButton(
@@ -234,7 +100,7 @@ class ProgressState extends State<ProgressBar> {
                     color: Colors.deepPurpleAccent,
                   ),
                   onPressed: () {
-                    countMinumMale();
+
                   },
                 ),
               ),
@@ -267,14 +133,11 @@ class ProgressState extends State<ProgressBar> {
                     color: Colors.deepPurpleAccent,
                   ),
                   onPressed: () {
-                    countMaxFemale();
+
                   },
                 ),
               ),
-              Text(
-                countFemale.toString(),
-                style: const TextStyle(fontSize: 30),
-              ),
+
               Container(
                 padding: const EdgeInsets.fromLTRB(70, 0, 0, 0),
                 child: ElevatedButton(
@@ -290,7 +153,7 @@ class ProgressState extends State<ProgressBar> {
                     color: Colors.deepPurpleAccent,
                   ),
                   onPressed: () {
-                    countMinumFemale();
+
                   },
                 ),
               ),
@@ -323,14 +186,11 @@ class ProgressState extends State<ProgressBar> {
                     color: Colors.deepPurpleAccent,
                   ),
                   onPressed: () {
-                    countMaxChield();
+
                   },
                 ),
               ),
-              Text(
-                countChield.toString(),
-                style: const TextStyle(fontSize: 30),
-              ),
+
               Container(
                 padding: const EdgeInsets.fromLTRB(70, 0, 0, 0),
                 child: ElevatedButton(
@@ -345,9 +205,7 @@ class ProgressState extends State<ProgressBar> {
                     Icons.remove,
                     color: Colors.deepPurpleAccent,
                   ),
-                  onPressed: () {
-                    countMinumChield();
-                  },
+                  onPressed: () {}
                 ),
               ),
             ],

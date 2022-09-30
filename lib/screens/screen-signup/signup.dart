@@ -18,11 +18,13 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   final formKey = GlobalKey<FormState>();
+  final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
   @override
   void dispose() {
+    nameController.dispose();
     emailController.dispose();
     passwordController.dispose();
 
@@ -40,6 +42,22 @@ class _SignUpState extends State<SignUp> {
               children: <Widget>[
                 const SizedBox(
                   height: 150,
+                ),
+                TextFormField(
+                  controller: nameController,
+                  keyboardType: TextInputType.name,
+                  decoration: const InputDecoration(
+                    labelText: "Nome:",
+                    labelStyle: TextStyle(
+                      color: Colors.black38,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 20,
+                    ),
+                  ),
+                  style: const TextStyle(fontSize: 20),
+                ),
+                const SizedBox(
+                  height: 10,
                 ),
                 TextFormField(
                   controller: emailController,
@@ -87,6 +105,7 @@ class _SignUpState extends State<SignUp> {
                   height: 60,
                   child: SizedBox.expand(
                     child: TextButton(
+                      onPressed: signUp,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: const <Widget>[
@@ -101,7 +120,6 @@ class _SignUpState extends State<SignUp> {
                           ),
                         ],
                       ),
-                      onPressed: signUp,
                     ),
                   ),
                 ),
