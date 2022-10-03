@@ -18,13 +18,11 @@ class Counter extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             title: TextButton(
-              onPressed: ()=>  Navigator.push(context,MaterialPageRoute(builder: (context) => Profile())),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(user.email!),
-                ],
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Profile()),
               ),
+              child: Text((user.email!), style: TextStyle(color: Colors.white)),
             ),
             backgroundColor: Colors.deepPurpleAccent,
             shape: const RoundedRectangleBorder(
