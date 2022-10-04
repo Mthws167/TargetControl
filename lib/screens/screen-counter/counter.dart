@@ -30,15 +30,15 @@ class Counter extends StatelessWidget {
                 bottom: Radius.circular(25),
               ),
             ),
-            actions: [
-              IconButton(
-                alignment: Alignment.center,
-                icon: const Icon(Icons.exit_to_app_outlined),
-                onPressed: () {
-                  FirebaseAuth.instance.signOut();
-                },
-              )
-            ],
+            // actions: [
+            //   IconButton(
+            //     alignment: Alignment.center,
+            //     icon: const Icon(Icons.exit_to_app_outlined),
+            //     onPressed: () {
+            //       FirebaseAuth.instance.signOut();
+            //     },
+            //   )
+            // ],
           ),
           body: Column(
             mainAxisAlignment: MainAxisAlignment.center,

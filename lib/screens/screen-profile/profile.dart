@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:countpeople/screens/screen-pdf/pdf.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,7 +14,6 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text(user.displayName!),
           backgroundColor: Colors.deepPurpleAccent,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
@@ -47,7 +47,13 @@ class ProgressState extends State<ProfileData> {
     return Center(
       child: Column(
         children: <Widget>[
-          SizedBox(),
+          const SizedBox(
+            child: CircleAvatar(
+              backgroundColor: Colors.deepPurpleAccent,
+              radius: 70,
+              child: Icon(Icons.person,color: Colors.white,size: 75,),
+            ),
+          ),
           const SizedBox(
             height: 40,
           ),
@@ -55,15 +61,15 @@ class ProgressState extends State<ProfileData> {
             child: Text(
               (user.email!),
               style: const TextStyle(
-                  fontSize: 18, decoration: TextDecoration.overline),
+                  fontSize: 18),
             ),
           ),
           const SizedBox(
             height: 40,
           ),
           SizedBox(
-            width: 250,
-            height: 35,
+            width:90,
+            height: 28,
             child: ElevatedButton(
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
@@ -75,14 +81,11 @@ class ProgressState extends State<ProfileData> {
                 ),
               ),
               onPressed: () async {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => PDFPage(),
-                  ),
-                );
+                Navigator.of(context).pop();
+                FirebaseAuth.instance.signOut();
               },
               child: const Text(
-                'Relatório em PDF? Clique Aqui',
+                'Sair',
                 style: TextStyle(
                   color: Colors.deepPurpleAccent,
                 ),
