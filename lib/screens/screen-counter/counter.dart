@@ -5,11 +5,10 @@ import 'package:countpeople/screens/screen-profile/profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import '../screen-profile/profile.dart';
+import 'package:flutter/services.dart';
 
 class Counter extends StatelessWidget {
   final user = FirebaseAuth.instance.currentUser!;
-
   Counter({Key? key}) : super(key: key);
 
   @override
@@ -22,7 +21,7 @@ class Counter extends StatelessWidget {
                 context,
                 MaterialPageRoute(builder: (context) => Profile()),
               ),
-              child: Text((user.email!), style: TextStyle(color: Colors.white)),
+              child: Text("Perfil", style: TextStyle(color: Colors.white)),
             ),
             backgroundColor: Colors.deepPurpleAccent,
             shape: const RoundedRectangleBorder(
@@ -54,7 +53,9 @@ class ProgressBar extends StatefulWidget {
   const ProgressBar({Key? key}) : super(key: key);
 
   @override
+  // ignore: no_logic_in_create_state
   State<StatefulWidget> createState() {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return ProgressState();
   }
 }

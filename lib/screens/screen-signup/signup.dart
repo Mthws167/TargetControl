@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../main.dart';
 import '../../utils/utils.dart';
@@ -27,7 +28,7 @@ class _SignUpState extends State<SignUp> {
     nameController.dispose();
     emailController.dispose();
     passwordController.dispose();
-
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     super.dispose();
   }
 

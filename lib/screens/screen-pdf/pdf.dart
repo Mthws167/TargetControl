@@ -1,6 +1,7 @@
 import 'package:countpeople/screens/screen-pdf/pdf_api.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class PDFPage extends StatelessWidget {
   const PDFPage({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class PDFPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const <Widget>[
-                  PDFState(),
+                PDFState(),
               ],
             ),
           ),
@@ -34,7 +35,9 @@ class PDFState extends StatefulWidget {
   const PDFState({Key? key}) : super(key: key);
 
   @override
+  // ignore: no_logic_in_create_state
   State<StatefulWidget> createState() {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
     return _PDFBody();
   }
 }
@@ -60,7 +63,7 @@ class _PDFBody extends State<PDFState> {
               ),
             ),
             onPressed: () async {
-             final pdfFile =  await PdfApi.generate();
+              final pdfFile = await PdfApi.generate();
 
               PdfApi.openFile(pdfFile);
             },
@@ -96,6 +99,8 @@ class _PDFBody extends State<PDFState> {
             ),
             onPressed: () async {
               Navigator.of(context).pop();
+              SystemChrome.setPreferredOrientations(
+                  [DeviceOrientation.portraitUp]);
             },
           ),
         ),

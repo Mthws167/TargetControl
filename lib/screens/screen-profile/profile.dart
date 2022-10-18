@@ -1,10 +1,6 @@
-import 'dart:async';
-import 'dart:developer';
-
-import 'package:countpeople/screens/screen-pdf/pdf.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Profile extends StatelessWidget {
   final user = FirebaseAuth.instance.currentUser!;
@@ -34,12 +30,13 @@ class ProfileData extends StatefulWidget {
   const ProfileData({Key? key}) : super(key: key);
 
   @override
+  // ignore: no_logic_in_create_state
   State<StatefulWidget> createState() {
-    return ProgressState();
+    return ProfileState();
   }
 }
 
-class ProgressState extends State<ProfileData> {
+class ProfileState extends State<ProfileData> {
   final user = FirebaseAuth.instance.currentUser!;
 
   @override
@@ -51,7 +48,11 @@ class ProgressState extends State<ProfileData> {
             child: CircleAvatar(
               backgroundColor: Colors.deepPurpleAccent,
               radius: 70,
-              child: Icon(Icons.person,color: Colors.white,size: 75,),
+              child: Icon(
+                Icons.person,
+                color: Colors.white,
+                size: 75,
+              ),
             ),
           ),
           const SizedBox(
@@ -60,15 +61,14 @@ class ProgressState extends State<ProfileData> {
           SizedBox(
             child: Text(
               (user.email!),
-              style: const TextStyle(
-                  fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
           ),
           const SizedBox(
             height: 40,
           ),
           SizedBox(
-            width:90,
+            width: 90,
             height: 28,
             child: ElevatedButton(
               style: ButtonStyle(

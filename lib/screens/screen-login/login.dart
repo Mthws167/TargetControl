@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:countpeople/main.dart';
 
@@ -14,6 +15,7 @@ class Login extends StatefulWidget {
 
   @override
   _LoginState createState() => _LoginState();
+
 }
 
 class _LoginState extends State<Login> {
@@ -25,7 +27,7 @@ class _LoginState extends State<Login> {
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
-
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     super.dispose();
   }
 

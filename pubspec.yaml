@@ -43,7 +43,23 @@ dependencies:
   pdf:
   path_provider:
   open_file: ^3.2.1
+  flutter_native_splash: 
+  flutter_launcher_icons:
 
+
+flutter_native_splash:
+  color: "#07D1FA"
+  image: "assets/images/background.png"
+  android: true
+  ios: true
+
+flutter_icons:
+  image_path: "assets/images/background.png"
+  ios: true
+  remove_alpha_ios: true
+  android: "launcher_icon"
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/images/background.png"
 
 dev_dependencies:
   flutter_test:
