@@ -44,33 +44,32 @@ dependencies:
   path_provider:
   open_file: ^3.2.1
   flutter_native_splash: 
-  flutter_launcher_icons:
+  
 
 
 flutter_native_splash:
-  color: "#07D1FA"
+  color: "#99c4fe"
   image: "assets/images/background.png"
   android: true
   ios: true
 
-flutter_icons:
-  image_path: "assets/images/background.png"
-  ios: true
-  remove_alpha_ios: true
-  android: "launcher_icon"
-  adaptive_icon_background: "#FFFFFF"
-  adaptive_icon_foreground: "assets/images/background.png"
+
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  flutter_lints: ^2.0.1
+
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.1
+  
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -87,7 +86,7 @@ flutter:
   assets:
   #    - images/a_dot_burr.jpeg
   #    - images/a_dot_ham.jpeg
-    - assets/images/background.jpg
+    - assets/images/background.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
