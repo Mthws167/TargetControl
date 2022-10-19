@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:page_transition/page_transition.dart';
 
 class Counter extends StatelessWidget {
   final user = FirebaseAuth.instance.currentUser!;
@@ -19,9 +20,11 @@ class Counter extends StatelessWidget {
             title: TextButton(
               onPressed: () => Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Profile()),
+                PageTransition(
+                    child: Profile(), type: PageTransitionType.rightToLeft),
               ),
-              child: Text("Perfil", style: TextStyle(color: Colors.white)),
+              child:
+                  const Text("Perfil", style: TextStyle(color: Colors.white)),
             ),
             backgroundColor: Colors.deepPurpleAccent,
             shape: const RoundedRectangleBorder(
@@ -368,7 +371,7 @@ class ProgressState extends State<ProgressBar> {
             onPressed: () async {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => PDFPage(),
+                  builder: (context) => const PDFPage(),
                 ),
               );
             },
