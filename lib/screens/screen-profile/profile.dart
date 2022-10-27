@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Profile extends StatelessWidget {
   final user = FirebaseAuth.instance.currentUser!;
@@ -30,7 +32,6 @@ class ProfileData extends StatefulWidget {
   const ProfileData({Key? key}) : super(key: key);
 
   @override
-  // ignore: no_logic_in_create_state
   State<StatefulWidget> createState() {
     return ProfileState();
   }
@@ -38,6 +39,7 @@ class ProfileData extends StatefulWidget {
 
 class ProfileState extends State<ProfileData> {
   final user = FirebaseAuth.instance.currentUser!;
+
 
   @override
   Widget build(BuildContext context) {
@@ -59,9 +61,21 @@ class ProfileState extends State<ProfileData> {
             height: 40,
           ),
           SizedBox(
-            child: Text(
-              (user.email!),
-              style: const TextStyle(fontSize: 18),
+            child: TextButton(
+              onPressed: chamarEmail,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    (user.email!),
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           const SizedBox(
@@ -96,4 +110,17 @@ class ProfileState extends State<ProfileData> {
       ),
     );
   }
+
 }
+
+Future<dynamic> chamarEmail() async {
+  final user = FirebaseAuth.instance.currentUser!;
+  launchUrl(Uri(
+      scheme: "mailto",
+      path: (user.email!),
+      queryParameters: {
+        'subject': 'Observações',
+        'body': 'Detalhe sua experiência e diga quais dificuldades encontrou...'
+      }));
+}
+
