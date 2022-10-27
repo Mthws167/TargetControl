@@ -44,7 +44,9 @@ dependencies:
   path_provider:
   open_file: ^3.2.1
   flutter_native_splash: 
-  page_transition: 
+  page_transition:
+  lottie:
+  animated_splash_screen:
   
 
 
