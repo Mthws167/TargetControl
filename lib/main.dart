@@ -4,6 +4,7 @@ import 'package:countpeople/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
 import 'firebase_options.dart';
 
 Future main() async {
@@ -25,16 +26,19 @@ class MyApp extends StatelessWidget {
         scaffoldMessengerKey: Utils.messengerKey,
         navigatorKey: navigatorKey,
         debugShowCheckedModeBanner: false,
-        home: TargetControl(),
+        home: const TargetControl(),
       );
 }
 
 class TargetControl extends StatelessWidget {
+  const TargetControl({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) => Scaffold(
         body: StreamBuilder<User?>(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
+            SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual);
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(  
                 child: CircularProgressIndicator(
