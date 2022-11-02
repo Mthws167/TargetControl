@@ -17,14 +17,14 @@ class Counter extends StatelessWidget {
         onWillPop: () async => false,
         child: Scaffold(
           appBar: AppBar(
-            title: TextButton(
+            title: IconButton(
               onPressed: () => Navigator.push(
                 context,
                 PageTransition(
                     child: Profile(), type: PageTransitionType.rightToLeft),
               ),
-              child:
-                  const Text("Perfil", style: TextStyle(color: Colors.white)),
+              icon:
+                  const Icon(Icons.person, color: Colors.white),
             ),
             backgroundColor: Colors.deepPurpleAccent,
             shape: const RoundedRectangleBorder(
@@ -32,15 +32,6 @@ class Counter extends StatelessWidget {
                 bottom: Radius.circular(25),
               ),
             ),
-            // actions: [
-            //   IconButton(
-            //     alignment: Alignment.center,
-            //     icon: const Icon(Icons.exit_to_app_outlined),
-            //     onPressed: () {
-            //       FirebaseAuth.instance.signOut();
-            //     },
-            //   )
-            // ],
           ),
           body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -199,7 +190,7 @@ class ProgressState extends State<ProgressBar> {
           child: Row(
             children: <Widget>[
               Container(
-                padding: const EdgeInsets.fromLTRB(30, 0, 80, 0),
+                padding: const EdgeInsets.fromLTRB(30, 0, 40, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       fixedSize: const Size(50, 50),
@@ -222,7 +213,7 @@ class ProgressState extends State<ProgressBar> {
                 style: const TextStyle(fontSize: 30),
               ),
               Container(
-                padding: const EdgeInsets.fromLTRB(70, 0, 0, 0),
+                padding: const EdgeInsets.fromLTRB(40, 0, 0, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       fixedSize: const Size(50, 50),
@@ -255,7 +246,7 @@ class ProgressState extends State<ProgressBar> {
           child: Row(
             children: <Widget>[
               Container(
-                padding: const EdgeInsets.fromLTRB(30, 0, 80, 0),
+                padding: const EdgeInsets.fromLTRB(30, 0, 40, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       fixedSize: const Size(50, 50),
@@ -278,7 +269,7 @@ class ProgressState extends State<ProgressBar> {
                 style: const TextStyle(fontSize: 30),
               ),
               Container(
-                padding: const EdgeInsets.fromLTRB(70, 0, 0, 0),
+                padding: const EdgeInsets.fromLTRB(40, 0, 0, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       fixedSize: const Size(50, 50),
@@ -311,7 +302,7 @@ class ProgressState extends State<ProgressBar> {
           child: Row(
             children: <Widget>[
               Container(
-                padding: const EdgeInsets.fromLTRB(30, 0, 80, 0),
+                padding: const EdgeInsets.fromLTRB(30, 0, 40, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       fixedSize: const Size(50, 50),
@@ -334,7 +325,7 @@ class ProgressState extends State<ProgressBar> {
                 style: const TextStyle(fontSize: 30),
               ),
               Container(
-                padding: const EdgeInsets.fromLTRB(70, 0, 0, 0),
+                padding: const EdgeInsets.fromLTRB(40, 0, 0, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       fixedSize: const Size(50, 50),
@@ -356,7 +347,6 @@ class ProgressState extends State<ProgressBar> {
           ),
         ),
         SizedBox(
-          width: 250,
           height: 35,
           child: ElevatedButton(
             style: ButtonStyle(
