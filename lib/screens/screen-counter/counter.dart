@@ -190,7 +190,7 @@ class ProgressState extends State<ProgressBar> {
           child: Row(
             children: <Widget>[
               Container(
-                padding: const EdgeInsets.fromLTRB(30, 0, 40, 0),
+                padding: const EdgeInsets.fromLTRB(30, 0, 70, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       fixedSize: const Size(50, 50),
@@ -213,7 +213,7 @@ class ProgressState extends State<ProgressBar> {
                 style: const TextStyle(fontSize: 30),
               ),
               Container(
-                padding: const EdgeInsets.fromLTRB(40, 0, 0, 0),
+                padding: const EdgeInsets.fromLTRB(80, 0, 0, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       fixedSize: const Size(50, 50),
@@ -246,7 +246,7 @@ class ProgressState extends State<ProgressBar> {
           child: Row(
             children: <Widget>[
               Container(
-                padding: const EdgeInsets.fromLTRB(30, 0, 40, 0),
+                padding: const EdgeInsets.fromLTRB(30, 0, 70, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       fixedSize: const Size(50, 50),
@@ -269,7 +269,7 @@ class ProgressState extends State<ProgressBar> {
                 style: const TextStyle(fontSize: 30),
               ),
               Container(
-                padding: const EdgeInsets.fromLTRB(40, 0, 0, 0),
+                padding: const EdgeInsets.fromLTRB(80, 0, 0, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       fixedSize: const Size(50, 50),
@@ -302,7 +302,7 @@ class ProgressState extends State<ProgressBar> {
           child: Row(
             children: <Widget>[
               Container(
-                padding: const EdgeInsets.fromLTRB(30, 0, 40, 0),
+                padding: const EdgeInsets.fromLTRB(30, 0, 70, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       fixedSize: const Size(50, 50),
@@ -325,7 +325,7 @@ class ProgressState extends State<ProgressBar> {
                 style: const TextStyle(fontSize: 30),
               ),
               Container(
-                padding: const EdgeInsets.fromLTRB(40, 0, 0, 0),
+                padding: const EdgeInsets.fromLTRB(80, 0, 0, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       fixedSize: const Size(50, 50),
